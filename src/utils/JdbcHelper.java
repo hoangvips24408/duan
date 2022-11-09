@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 public class JdbcHelper {
 
     static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=duan";
+    static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=FastFood";
     static String user = "sa";
     static String pass = "2306";
 

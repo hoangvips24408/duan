@@ -12,8 +12,8 @@ import utils.JdbcHelper;
  * @author Admin
  */
 public class NhanVienDAO extends FastFood<NhanVien, String>{
-    String insert_sql="INSERT INTO NhanVien (MaNV, TenNV, NgaySinh, GioiTinh, DiaChi, SDT, ChucVu, Hinh, MatKhau) VALUES (?,?,?,?,?,?,?,?,?)";
-    String update_sql="UPDATE NhanVien TenNV =?, NgaySinh =?, GioiTinh =?, DiaChi =?, SDT =?, ChucVu =?, Hinh =?, MatKhau =? where MaNV = ?";
+    String insert_sql="INSERT INTO NhanVien (MaNV, TenNV, NgaySinh, GioiTinh, DiaChi, SDT, ChucVu, Hinh, Email) VALUES (?,?,?,?,?,?,?,?,?)";
+    String update_sql="UPDATE NhanVien TenNV =?, NgaySinh =?, GioiTinh =?, DiaChi =?, SDT =?, ChucVu =?, Hinh =?, Email =? where MaNV = ?";
     String delete_sql="DELETE FROM NhanVien where MaNV=?";
     String select_all="SELECT * FROM NhanVien";
     String select_byID="SELECT * FROM NhanVien where MaNV=?";
@@ -63,6 +63,7 @@ public class NhanVienDAO extends FastFood<NhanVien, String>{
                 entity.setNgaySinh(rs.getString("NgaySinh"));
                 entity.setSDT(rs.getString("SDT"));
                 entity.setTenNV(rs.getString("TenNV"));
+                entity.setEmail(rs.getString("Email"));
                 list.add(entity);
             }
         } catch (Exception e) {

@@ -15,21 +15,7 @@ public class NhanVien {
     boolean ChucVu;
     String Hinh;
     String MatKhau;
-
-    public NhanVien() {
-    }
-
-    public NhanVien(String MaNV, String TenNV, String NgaySinh, boolean GioiTinh, String DiaChi, String SDT, boolean ChucVu, String Hinh, String MatKhau) {
-        this.MaNV = MaNV;
-        this.TenNV = TenNV;
-        this.NgaySinh = NgaySinh;
-        this.GioiTinh = GioiTinh;
-        this.DiaChi = DiaChi;
-        this.SDT = SDT;
-        this.ChucVu = ChucVu;
-        this.Hinh = Hinh;
-        this.MatKhau = MatKhau;
-    }
+    String Email;
 
     public String getMaNV() {
         return MaNV;
@@ -102,5 +88,30 @@ public class NhanVien {
     public void setMatKhau(String MatKhau) {
         this.MatKhau = MatKhau;
     }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public NhanVien(String MaNV, String TenNV, String NgaySinh, boolean GioiTinh, String DiaChi, String SDT, boolean ChucVu, String Hinh, String MatKhau, String Email) {
+        this.MaNV = MaNV;
+        this.TenNV = TenNV;
+        this.NgaySinh = NgaySinh;
+        this.GioiTinh = GioiTinh;
+        this.DiaChi = DiaChi;
+        this.SDT = SDT;
+        this.ChucVu = ChucVu;
+        this.Hinh = Hinh;
+        this.MatKhau = MatKhau;
+        this.Email = Email;
+    }
+
+    public NhanVien() {
+    }
+
     
 }
