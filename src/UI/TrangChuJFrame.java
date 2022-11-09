@@ -1,0 +1,559 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package UI;
+
+import java.awt.Button;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
+/**
+ *
+ * @author Quan
+ */
+public class TrangChuJFrame extends javax.swing.JFrame {
+
+    Color DefaultColor, ClickedColor;
+    Border border = BorderFactory.createLineBorder(ClickedColor);
+
+    public TrangChuJFrame() {
+        initComponents();
+        setTitle("Trang Chủ");
+        setLocationRelativeTo(null);
+        DefaultColor = new Color(240, 151, 57);
+        ClickedColor = new Color(238, 173, 14);
+        
+
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        pnlBackGround = new javax.swing.JPanel();
+        pnlMain = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        btnTrangChu = new javax.swing.JButton();
+        btnChiTietHoaDon = new javax.swing.JButton();
+        btnDanhMuc = new javax.swing.JButton();
+        btnMonAn = new javax.swing.JButton();
+        btnDoanhThu = new javax.swing.JButton();
+        btnKhuyenMai = new javax.swing.JButton();
+        btnHoaDon = new javax.swing.JButton();
+        btnNhanVien = new javax.swing.JButton();
+        btnKhachHang = new javax.swing.JButton();
+        btnTaiKhoan = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pnlMain.setBackground(new java.awt.Color(204, 204, 204));
+        pnlMain.setPreferredSize(new java.awt.Dimension(1028, 585));
+
+        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
+        pnlMain.setLayout(pnlMainLayout);
+        pnlMainLayout.setHorizontalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1028, Short.MAX_VALUE)
+        );
+        pnlMainLayout.setVerticalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 586, Short.MAX_VALUE)
+        );
+
+        jPanel2.setBackground(new java.awt.Color(240, 151, 57));
+
+        btnTrangChu.setBackground(new java.awt.Color(240, 151, 57));
+        btnTrangChu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnTrangChu.setForeground(new java.awt.Color(255, 255, 255));
+        btnTrangChu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
+        btnTrangChu.setText("TRANG CHỦ");
+        btnTrangChu.setBorder(null);
+        btnTrangChu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTrangChu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrangChuActionPerformed(evt);
+            }
+        });
+
+        btnChiTietHoaDon.setBackground(new java.awt.Color(240, 151, 57));
+        btnChiTietHoaDon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnChiTietHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        btnChiTietHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ChiTietBill.png"))); // NOI18N
+        btnChiTietHoaDon.setText("CHI TIẾT HÓA ĐƠN");
+        btnChiTietHoaDon.setBorder(null);
+        btnChiTietHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnChiTietHoaDonMouseEntered(evt);
+            }
+        });
+        btnChiTietHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChiTietHoaDonActionPerformed(evt);
+            }
+        });
+
+        btnDanhMuc.setBackground(new java.awt.Color(240, 151, 57));
+        btnDanhMuc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnDanhMuc.setForeground(new java.awt.Color(255, 255, 255));
+        btnDanhMuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DanhMuc.png"))); // NOI18N
+        btnDanhMuc.setText("DANH MỤC");
+        btnDanhMuc.setBorder(null);
+        btnDanhMuc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDanhMuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDanhMucActionPerformed(evt);
+            }
+        });
+
+        btnMonAn.setBackground(new java.awt.Color(240, 151, 57));
+        btnMonAn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnMonAn.setForeground(new java.awt.Color(255, 255, 255));
+        btnMonAn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/monAn.png"))); // NOI18N
+        btnMonAn.setText("MÓN ĂN");
+        btnMonAn.setBorder(null);
+        btnMonAn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnMonAn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonAnActionPerformed(evt);
+            }
+        });
+
+        btnDoanhThu.setBackground(new java.awt.Color(240, 151, 57));
+        btnDoanhThu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnDoanhThu.setForeground(new java.awt.Color(255, 255, 255));
+        btnDoanhThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DoanhThu.png"))); // NOI18N
+        btnDoanhThu.setText("DOANH THU");
+        btnDoanhThu.setBorder(null);
+        btnDoanhThu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDoanhThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoanhThuActionPerformed(evt);
+            }
+        });
+
+        btnKhuyenMai.setBackground(new java.awt.Color(240, 151, 57));
+        btnKhuyenMai.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnKhuyenMai.setForeground(new java.awt.Color(255, 255, 255));
+        btnKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/KhuyenMai.png"))); // NOI18N
+        btnKhuyenMai.setText("kHUYẾN MÃI");
+        btnKhuyenMai.setBorder(null);
+        btnKhuyenMai.setHideActionText(true);
+        btnKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhuyenMaiActionPerformed(evt);
+            }
+        });
+
+        btnHoaDon.setBackground(new java.awt.Color(240, 151, 57));
+        btnHoaDon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnHoaDon.setForeground(new java.awt.Color(255, 255, 255));
+        btnHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bill.png"))); // NOI18N
+        btnHoaDon.setText("HÓA ĐƠN");
+        btnHoaDon.setBorder(null);
+        btnHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoaDonActionPerformed(evt);
+            }
+        });
+
+        btnNhanVien.setBackground(new java.awt.Color(240, 151, 57));
+        btnNhanVien.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnNhanVien.setForeground(new java.awt.Color(255, 255, 255));
+        btnNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/staff.png"))); // NOI18N
+        btnNhanVien.setText("NHÂN VIÊN");
+        btnNhanVien.setBorder(null);
+        btnNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNhanVienMouseEntered(evt);
+            }
+        });
+        btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNhanVienActionPerformed(evt);
+            }
+        });
+
+        btnKhachHang.setBackground(new java.awt.Color(240, 151, 57));
+        btnKhachHang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Customer2.png"))); // NOI18N
+        btnKhachHang.setText("KHÁCH HÀNG");
+        btnKhachHang.setBorder(null);
+        btnKhachHang.setHideActionText(true);
+        btnKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnKhachHangMouseEntered(evt);
+            }
+        });
+        btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhachHangActionPerformed(evt);
+            }
+        });
+
+        btnTaiKhoan.setBackground(new java.awt.Color(240, 151, 57));
+        btnTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        btnTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Acount.png"))); // NOI18N
+        btnTaiKhoan.setText("ĐỔI MẬT KHẨU");
+        btnTaiKhoan.setBorder(null);
+        btnTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaiKhoanActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTrangChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnChiTietHoaDon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDanhMuc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMonAn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDoanhThu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnKhuyenMai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnTrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnChiTietHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMonAn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/food.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout pnlBackGroundLayout = new javax.swing.GroupLayout(pnlBackGround);
+        pnlBackGround.setLayout(pnlBackGroundLayout);
+        pnlBackGroundLayout.setHorizontalGroup(
+            pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1028, Short.MAX_VALUE)
+                    .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pnlBackGroundLayout.setVerticalGroup(
+            pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlBackGround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTrangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangChuActionPerformed
+        TrangChuJInternalFrame trangChu = new TrangChuJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(trangChu).setVisible(true);
+
+        test("Trang Chủ");
+    }//GEN-LAST:event_btnTrangChuActionPerformed
+
+    private void btnTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiKhoanActionPerformed
+        DoiLaiMatKhauJInternalFrame taiKhoan = new DoiLaiMatKhauJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(taiKhoan).setVisible(true);
+
+        test("Đổi mật khẩu");
+
+    }//GEN-LAST:event_btnTaiKhoanActionPerformed
+
+    private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
+        HoaDonJInternalFrame hoaDon = new HoaDonJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(hoaDon).setVisible(true);
+
+        test("Hóa Đơn");
+    }//GEN-LAST:event_btnHoaDonActionPerformed
+
+    private void btnChiTietHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietHoaDonActionPerformed
+        ChiTietHoaDonJInternalFrame chiTiet = new ChiTietHoaDonJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(chiTiet).setVisible(true);
+
+        test("Chi Tiết Hóa Đơn");
+    }//GEN-LAST:event_btnChiTietHoaDonActionPerformed
+
+    private void btnDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhMucActionPerformed
+        DanhMucJInternalFrame danhMuc = new DanhMucJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(danhMuc).setVisible(true);
+
+        test("Danh Mục");
+    }//GEN-LAST:event_btnDanhMucActionPerformed
+
+    private void btnMonAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonAnActionPerformed
+        MonAnJInternalFrame monAn = new MonAnJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(monAn).setVisible(true);
+
+        test("Món Ăn");
+    }//GEN-LAST:event_btnMonAnActionPerformed
+
+    private void btnDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoanhThuActionPerformed
+        DoanhThuJInternalFrame doanhThu = new DoanhThuJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(doanhThu).setVisible(true);
+
+        test("Doanh Thu");
+    }//GEN-LAST:event_btnDoanhThuActionPerformed
+
+    private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
+        NhanVienJInternalFrame nhanVien = new NhanVienJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(nhanVien).setVisible(true);
+
+        test("Nhân Viên");
+    }//GEN-LAST:event_btnNhanVienActionPerformed
+
+    private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
+        KhuyenMaiJInternalFrame khuyenMai = new KhuyenMaiJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(khuyenMai).setVisible(true);
+
+        test("Khuyến Mãi");
+    }//GEN-LAST:event_btnKhuyenMaiActionPerformed
+
+    private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+        QuanLyKhachHangJInternalFrame khachHang = new QuanLyKhachHangJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(khachHang).setVisible(true);
+
+        test("Khách Hàng");
+    }//GEN-LAST:event_btnKhachHangActionPerformed
+
+    private void btnChiTietHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChiTietHoaDonMouseEntered
+//        btnChiTietHoaDon.setBorder(border);
+//        btnKhachHang.setBorder(null);
+//        btnNhanVien.setBorder(null);
+    }//GEN-LAST:event_btnChiTietHoaDonMouseEntered
+
+    private void btnKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhachHangMouseEntered
+//        btnChiTietHoaDon.setBorder(null);
+//        btnKhachHang.setBorder(border);
+//        btnNhanVien.setBorder(null);
+    }//GEN-LAST:event_btnKhachHangMouseEntered
+
+    private void btnNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanVienMouseEntered
+//        btnChiTietHoaDon.setBorder(null);
+//        btnKhachHang.setBorder(null);
+//        btnNhanVien.setBorder(border);
+    }//GEN-LAST:event_btnNhanVienMouseEntered
+
+    public void test(String x) {
+        String getText = x;
+
+        if (x.equalsIgnoreCase("Trang Chủ")) {
+            btnTrangChu.setBackground(ClickedColor);
+            btnTaiKhoan.setBackground(DefaultColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(DefaultColor);
+        }else if (x.equalsIgnoreCase("Tài Khoản")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnTaiKhoan.setBackground(ClickedColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(DefaultColor);
+        } else if (x.equalsIgnoreCase("Hóa Đơn")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnTaiKhoan.setBackground(DefaultColor);
+            btnHoaDon.setBackground(ClickedColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(DefaultColor);
+        } else if (x.equalsIgnoreCase("Chi Tiết Hóa Đơn")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnTaiKhoan.setBackground(DefaultColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(ClickedColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(DefaultColor);
+        } else if (x.equalsIgnoreCase("Danh Mục")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnTaiKhoan.setBackground(DefaultColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(ClickedColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(DefaultColor);
+        } else if (x.equalsIgnoreCase("Món Ăn")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnTaiKhoan.setBackground(DefaultColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(ClickedColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(DefaultColor);
+        } else if (x.equalsIgnoreCase("Doanh Thu")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnTaiKhoan.setBackground(DefaultColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(ClickedColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(DefaultColor);
+        } else if (x.equalsIgnoreCase("Nhân Viên")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnTaiKhoan.setBackground(DefaultColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(ClickedColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(DefaultColor);
+        } else if (x.equalsIgnoreCase("Khuyến Mãi")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnTaiKhoan.setBackground(DefaultColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(ClickedColor);
+            btnKhachHang.setBackground(DefaultColor);
+        } else if (x.equalsIgnoreCase("Khách Hàng")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnTaiKhoan.setBackground(DefaultColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(ClickedColor);
+        }
+
+    }
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TrangChuJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TrangChuJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TrangChuJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TrangChuJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TrangChuJFrame().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChiTietHoaDon;
+    private javax.swing.JButton btnDanhMuc;
+    private javax.swing.JButton btnDoanhThu;
+    private javax.swing.JButton btnHoaDon;
+    private javax.swing.JButton btnKhachHang;
+    private javax.swing.JButton btnKhuyenMai;
+    private javax.swing.JButton btnMonAn;
+    private javax.swing.JButton btnNhanVien;
+    private javax.swing.JButton btnTaiKhoan;
+    private javax.swing.JButton btnTrangChu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel pnlBackGround;
+    private javax.swing.JPanel pnlMain;
+    // End of variables declaration//GEN-END:variables
+}
