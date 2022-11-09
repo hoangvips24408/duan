@@ -6,13 +6,31 @@ package UI;
 
 import DAO.NhanVienDAO;
 import Entity.NhanVien;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 import utils.Auth;
+import utils.MsgBox;
 import utils.XImage;
 
 /**
@@ -20,21 +38,23 @@ import utils.XImage;
  * @author Quan
  */
 public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
+
     NhanVienDAO dao = new NhanVienDAO();
     JFileChooser filechooser = new JFileChooser();
-    int row =0;
-    String pass="123";
+    int row = 0;
+    String pass = "123";
+
     /**
      * Creates new form NhanVienJInternalFrame
      */
     public NhanVienJInternalFrame() {
         initComponents();
-        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         filltable();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,6 +93,11 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
         jButton1.setText("Xóa");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
         jButton3.setText("Thêm");
@@ -84,6 +109,11 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/repair.png"))); // NOI18N
         jButton2.setText("Sửa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         lblTDN1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTDN1.setForeground(new java.awt.Color(0, 153, 0));
@@ -91,6 +121,11 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
 
         btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Clear.png"))); // NOI18N
         btnMoi.setText("Mới");
+        btnMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiActionPerformed(evt);
+            }
+        });
 
         lblTDN2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTDN2.setForeground(new java.awt.Color(0, 153, 0));
@@ -290,14 +325,16 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-  
+        intsert();
+        taoMaQR();
+        guiEmail();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void lblHinhAnhMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhAnhMousePressed
         // TODO add your handling code here:
-        if (evt.getClickCount()==2) {
-            
-            edit();
+        if (evt.getClickCount() == 2) {
+
+            chonanh();
         }
     }//GEN-LAST:event_lblHinhAnhMousePressed
 
@@ -306,6 +343,21 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         this.row = tblQuanLyNhanVien.rowAtPoint(evt.getPoint());
         edit();
     }//GEN-LAST:event_tblQuanLyNhanVienMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
+        // TODO add your handling code here:
+        clearfrom();
+    }//GEN-LAST:event_btnMoiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -337,66 +389,160 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSoDienThoai;
     private javax.swing.JTextField txtemail;
     // End of variables declaration//GEN-END:variables
-void chonanh() {
+
+    void chonanh() {
         if (filechooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = filechooser.getSelectedFile();
             XImage.save(file);
-            ImageIcon icon = XImage.read(file.getName());
+            int with = lblHinhAnh.getWidth();
+    int heigh = lblHinhAnh.getHeight();
+
+            ImageIcon icon = new ImageIcon(XImage.read(file.getName()).getImage().getScaledInstance(with, heigh, 0));
             lblHinhAnh.setIcon(icon);
             lblHinhAnh.setToolTipText(file.getName());
         }
     }
-void filltable(){
-    DefaultTableModel model = (DefaultTableModel) tblQuanLyNhanVien.getModel();
-    model.setRowCount(0);
-    List<NhanVien> nv = dao.selectAll();
-    for (NhanVien nhanVien : nv) {
-        Object[] row = {nhanVien.getMaNV(),nhanVien.getTenNV(),nhanVien.getNgaySinh(),nhanVien.isGioiTinh()?"Nam":"Nữ",nhanVien.getDiaChi(),nhanVien.getSDT(),nhanVien.isChucVu()?"Quản lý":"Nhân viên",nhanVien.getHinh(),nhanVien.getEmail()};
-        model.addRow(row);
-    }         
-}
-void setfrom(NhanVien nv){
-    txtDiaChi.setText(nv.getDiaChi());
-    txtHoTen.setText(nv.getTenNV());
-    txtMaNhanVien.setText(nv.getMaNV());
-    txtNgaySinh.setText(nv.getNgaySinh());
-    txtSoDienThoai.setText(nv.getSDT());
-    txtemail.setText(nv.getEmail());
-    rdoNam.setSelected(nv.isGioiTinh());
-    rdoNu.setSelected(!nv.isGioiTinh());
-    rdoQuanLy.setSelected(nv.isChucVu());
-    rdoNhanVien.setSelected(!nv.isChucVu());
-    int with = lblHinhAnh.getWidth();
+
+    void filltable() {
+        DefaultTableModel model = (DefaultTableModel) tblQuanLyNhanVien.getModel();
+        model.setRowCount(0);
+        List<NhanVien> nv = dao.selectAll();
+        for (NhanVien nhanVien : nv) {
+            Object[] row = {nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.getNgaySinh(), nhanVien.isGioiTinh() ? "Nam" : "Nữ", nhanVien.getDiaChi(), nhanVien.getSDT(), nhanVien.isChucVu() ? "Quản lý" : "Nhân viên", nhanVien.getHinh(), nhanVien.getEmail()};
+            model.addRow(row);
+        }
+    }
+
+    void setfrom(NhanVien nv) {
+        txtDiaChi.setText(nv.getDiaChi());
+        txtHoTen.setText(nv.getTenNV());
+        txtMaNhanVien.setText(nv.getMaNV());
+        txtNgaySinh.setText(nv.getNgaySinh());
+        txtSoDienThoai.setText(nv.getSDT());
+        txtemail.setText(nv.getEmail());
+        rdoNam.setSelected(nv.isGioiTinh());
+        rdoNu.setSelected(!nv.isGioiTinh());
+        rdoQuanLy.setSelected(nv.isChucVu());
+        rdoNhanVien.setSelected(!nv.isChucVu());
+
+        if (nv.getHinh() != null) {
+            int with = lblHinhAnh.getWidth();
     int heigh = lblHinhAnh.getHeight();
-    if (nv.getHinh()!=null) {
-        ImageIcon icon = new ImageIcon(XImage.read(nv.getHinh()).getImage().getScaledInstance(with, heigh, 0));
-        lblHinhAnh.setIcon(icon);
-        lblHinhAnh.setToolTipText(nv.getHinh());
+
+            ImageIcon icon = new ImageIcon(XImage.read(nv.getHinh()).getImage().getScaledInstance(with, heigh, 0));
+            lblHinhAnh.setIcon(icon);
+            lblHinhAnh.setToolTipText(nv.getHinh());
+        }
     }
-}
-void edit(){
-    String maNV = (String) tblQuanLyNhanVien.getValueAt(this.row, 0);
-    NhanVien nv = dao.selectById(maNV);
-    if (nv!=null) {
-        setfrom(nv);
-        
+
+    void edit() {
+        String maNV = (String) tblQuanLyNhanVien.getValueAt(this.row, 0);
+        NhanVien nv = dao.selectById(maNV);
+        if (nv != null) {
+            setfrom(nv);
+
+        }
     }
-}
-void random(){
-    
-}
-NhanVien getFrom(){
-    NhanVien nv = new NhanVien();
-    nv.setChucVu(rdoQuanLy.isSelected());
-    nv.setDiaChi(txtDiaChi.getText());
-    nv.setEmail(txtemail.getText());
-    nv.setGioiTinh(rdoNam.isSelected());
-    nv.setHinh(lblHinhAnh.getToolTipText());
-    nv.setMaNV(txtMaNhanVien.getText());
-    nv.setMatKhau(pass);
-    nv.setNgaySinh(txtNgaySinh.getText());
-    nv.setSDT(txtSoDienThoai.getText());
-    nv.setTenNV(txtHoTen.getText());
-    return nv;
-}
+
+    NhanVien getFrom() {
+        NhanVien nv = new NhanVien();
+        nv.setChucVu(rdoQuanLy.isSelected());
+        nv.setDiaChi(txtDiaChi.getText());
+        nv.setEmail(txtemail.getText());
+        nv.setGioiTinh(rdoNam.isSelected());
+        nv.setHinh(lblHinhAnh.getToolTipText());
+        nv.setMaNV(txtMaNhanVien.getText());
+        nv.setMatKhau(pass);
+        nv.setNgaySinh(txtNgaySinh.getText());
+        nv.setSDT(txtSoDienThoai.getText());
+        nv.setTenNV(txtHoTen.getText());
+        return nv;
+    }
+ void clearfrom() {
+        this.setfrom(new NhanVien());
+    }
+    void intsert() {
+        NhanVien nv = getFrom();
+//        try {
+            dao.insert(nv);
+            filltable();
+//        } catch (Exception e) {
+//        }
+
+    }
+    String duongdan;
+    void taoMaQR() {
+        try {
+
+            ByteArrayOutputStream out = QRCode.from(txtMaNhanVien.getText())
+                    .to(ImageType.PNG).stream();
+
+            String f_name = txtMaNhanVien.getText();
+            String Path_name = "D:\\";
+            FileOutputStream fout = new FileOutputStream(new File(Path_name + (f_name + ".PNG")));
+            fout.write(out.toByteArray());
+            fout.flush();
+            duongdan = Path_name + f_name +".PNG";
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    void guiEmail() {
+        Properties p = new Properties();
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", 587);
+        String senderEmail = "vihnhps24408@fpt.edu.vn";
+        String toEmail = txtemail.getText();
+        String subject = "Xin chào";
+        String body = "username của bạn là " + txtMaNhanVien.getText() + " và password của bạn là " + pass;
+        String pass1 = "01629390148vi";
+        Session s = Session.getInstance(p, new javax.mail.Authenticator() {
+            @Override
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new javax.mail.PasswordAuthentication(senderEmail, pass1);
+            }
+        });
+
+        try {
+            Message msg = new MimeMessage(s);
+            msg.setFrom(new InternetAddress(senderEmail));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            msg.setSubject(subject);
+            msg.setText(body);
+            MimeBodyPart mbp = new MimeBodyPart();
+            mbp.setContent(body,"text/html; charset=utf-8");
+            MimeBodyPart filepart = new MimeBodyPart();
+            File file = new File(duongdan);
+            FileDataSource fds =new FileDataSource(file);
+            filepart.setDataHandler(new DataHandler(fds));
+            filepart.setFileName(file.getName());
+            MimeMultipart multipart = new MimeMultipart();
+            multipart.addBodyPart(mbp);
+            multipart.addBodyPart(filepart);
+            msg.setContent(multipart);
+            Transport.send(msg);
+        } catch (MessagingException ex) {
+            Logger.getLogger(NhanVienJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    void update(){
+        NhanVien nv = getFrom();
+        try {
+            dao.update(nv);
+            filltable();
+            MsgBox.alert(this, "Cập nhật thành công");
+        } catch (Exception e) {
+        }
+    }
+    void delete(){
+        if (MsgBox.confirm(this, "Bạn có chắc xóa nhân viên này")) {
+            String maNV = txtMaNhanVien.getText();
+            dao.delete(maNV);
+            this.filltable();
+            clearfrom();
+        }
+    }
 }

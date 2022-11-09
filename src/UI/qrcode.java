@@ -159,7 +159,7 @@ public class qrcode extends javax.swing.JFrame implements Runnable, ThreadFactor
                     TrangChuJFrame tc = new TrangChuJFrame();
                     tc.setVisible(true);
                     webcam.close();
-                    this.dispose();
+                    this.setVisible(false);
                 }
 
             }

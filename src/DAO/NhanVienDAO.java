@@ -12,25 +12,25 @@ import utils.JdbcHelper;
  * @author Admin
  */
 public class NhanVienDAO extends FastFood<NhanVien, String>{
-    String insert_sql="INSERT INTO NhanVien (MaNV, TenNV, NgaySinh, GioiTinh, DiaChi, SDT, ChucVu, Hinh, Email) VALUES (?,?,?,?,?,?,?,?,?)";
-    String update_sql="UPDATE NhanVien TenNV =?, NgaySinh =?, GioiTinh =?, DiaChi =?, SDT =?, ChucVu =?, Hinh =?, Email =? where MaNV = ?";
+    String insert_sql="INSERT INTO NhanVien(MaNV, TenNV, NgaySinh, GioiTinh, DiaChi, SDT, ChucVu, Hinh, MatKhau, Email) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    String update_sql="UPDATE NhanVien SET TenNV =?, NgaySinh =?, GioiTinh =?, DiaChi =?, SDT =?, ChucVu =?, Hinh =?, MatKhau =?, Email =? where MaNV = ?";
     String delete_sql="DELETE FROM NhanVien where MaNV=?";
     String select_all="SELECT * FROM NhanVien";
     String select_byID="SELECT * FROM NhanVien where MaNV=?";
 
     @Override
     public void insert(NhanVien entity) {
-        JdbcHelper.update(insert_sql, entity.getMaNV(),entity.getTenNV(),entity.getNgaySinh(),entity.isGioiTinh(),entity.getDiaChi(),entity.isChucVu(),entity.getHinh(),entity.getMatKhau());
+        JdbcHelper.update(insert_sql, entity.getMaNV(),entity.getTenNV(),entity.getNgaySinh(),entity.isGioiTinh(),entity.getDiaChi(),entity.getSDT(),entity.isChucVu(),entity.getHinh(),entity.getMatKhau(),entity.getEmail());
     }
 
     @Override
     public void update(NhanVien entity) {
-        JdbcHelper.update(update_sql,entity.getTenNV(),entity.getNgaySinh(),entity.isGioiTinh(),entity.getDiaChi(),entity.isChucVu(),entity.getHinh(),entity.getMatKhau(), entity.getMaNV());
+        JdbcHelper.update(update_sql,entity.getTenNV(),entity.getNgaySinh(),entity.isGioiTinh(),entity.getDiaChi(),entity.getSDT(),entity.isChucVu(),entity.getHinh(),entity.getMatKhau(),entity.getEmail(), entity.getMaNV());
     }
 
     @Override
     public void delete(String id) {
-        JdbcHelper.update(id);
+        JdbcHelper.update(delete_sql,id);
     }
 
     @Override
