@@ -4,8 +4,28 @@
  */
 package UI;
 
+import DAO.KhachHangDAO;
+import Entity.KhachHang;
+import com.sun.mail.imap.ACL;
 import java.awt.Button;
 import java.awt.Color;
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import utils.Auth;
@@ -26,8 +46,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         DefaultColor = new Color(240, 151, 57);
         ClickedColor = new Color(238, 173, 14);
-        
-
+        checksinhnhat();
     }
 
     @SuppressWarnings("unchecked")
@@ -354,11 +373,12 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
         if (!Auth.isManager()) {
             MsgBox.alert(this, "Bạn không có quyển vào nhân viên");
-        }else{
-        NhanVienJInternalFrame nhanVien = new NhanVienJInternalFrame();
-        pnlMain.removeAll();
-        pnlMain.add(nhanVien).setVisible(true);
-        test("Nhân Viên");}
+        } else {
+            NhanVienJInternalFrame nhanVien = new NhanVienJInternalFrame();
+            pnlMain.removeAll();
+            pnlMain.add(nhanVien).setVisible(true);
+            test("Nhân Viên");
+        }
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
@@ -409,7 +429,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnNhanVien.setBackground(DefaultColor);
             btnKhuyenMai.setBackground(DefaultColor);
             btnKhachHang.setBackground(DefaultColor);
-        }else if (x.equalsIgnoreCase("Tài Khoản")) {
+        } else if (x.equalsIgnoreCase("Tài Khoản")) {
             btnTrangChu.setBackground(DefaultColor);
             btnTaiKhoan.setBackground(ClickedColor);
             btnHoaDon.setBackground(DefaultColor);
@@ -560,5 +580,66 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlBackGround;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
+    KhachHangDAO dao = new KhachHangDAO();
 
+    void checksinhnhat() {
+        LocalDateTime current = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formatted = current.format(formatter);
+        String[] ngaymay = formatted.split("-");
+        List<KhachHang> list = dao.selectAll();
+        for (KhachHang khachHang : list) {
+            String sinhnhat = khachHang.getNgaySinh();
+            String[] ngaysinhnhat = sinhnhat.split("-");
+            if (ngaymay[1].equals(ngaysinhnhat[1])) {
+                double ngaythuc = Double.parseDouble(ngaymay[2]);
+                double ngaysinh = Double.parseDouble(ngaysinhnhat[2]);
+                if ((ngaysinh-ngaythuc)==3) {
+                    guiEmail(khachHang.getEmail());
+                }
+
+            }
+        }
+    }
+       void guiEmail(String email) {
+        Properties p = new Properties();
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", 587);
+        String senderEmail = "vihnhps24408@fpt.edu.vn";
+        String toEmail = email;
+        String subject = "Xin chào";
+        String body = "username của bạn là ";
+        String pass1 = "01629390148vi";
+        Session s = Session.getInstance(p, new javax.mail.Authenticator() {
+            @Override
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new javax.mail.PasswordAuthentication(senderEmail, pass1);
+            }
+        });
+
+        try {
+            Message msg = new MimeMessage(s);
+            msg.setFrom(new InternetAddress(senderEmail));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            msg.setSubject(subject);
+            msg.setText(body);
+//            MimeBodyPart mbp = new MimeBodyPart();
+//            mbp.setContent(body,"text/html; charset=utf-8");
+//            MimeBodyPart filepart = new MimeBodyPart();
+//            File file = new File(duongdan);
+//            FileDataSource fds =new FileDataSource(file);
+//            filepart.setDataHandler(new DataHandler(fds));
+//            filepart.setFileName(file.getName());
+//            MimeMultipart multipart = new MimeMultipart();
+//            multipart.addBodyPart(mbp);
+//            multipart.addBodyPart(filepart);
+//            msg.setContent(multipart);
+            Transport.send(msg);
+        } catch (MessagingException ex) {
+            Logger.getLogger(NhanVienJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
 }
