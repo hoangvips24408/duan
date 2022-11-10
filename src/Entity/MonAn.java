@@ -1,23 +1,29 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Entity;
+
+import java.util.Objects;
 
 /**
  *
- * @author Admin
+ * @author lenovo
  */
 public class MonAn {
 
-    String MaMA;
-    String TenMon;
-    String LoaiMon;
-    String DonViTinh;
-    float GiaTien;
-    int SoLuong;
-    String Hinh;
+    public String MaMA;
+    public String TenMon;
+    public int LoaiMon;
+    public String DonViTinh;
+    public double GiaTien;
+    public int SoLuong;
+    public String Hinh;
 
     public MonAn() {
     }
 
-    public MonAn(String MaMA, String TenMon, String LoaiMon, String DonViTinh, float GiaTien, int SoLuong, String Hinh) {
+    public MonAn(String MaMA, String TenMon, int LoaiMon, String DonViTinh, double GiaTien, int SoLuong, String Hinh) {
         this.MaMA = MaMA;
         this.TenMon = TenMon;
         this.LoaiMon = LoaiMon;
@@ -43,11 +49,11 @@ public class MonAn {
         this.TenMon = TenMon;
     }
 
-    public String getLoaiMon() {
+    public int getLoaiMon() {
         return LoaiMon;
     }
 
-    public void setLoaiMon(String LoaiMon) {
+    public void setLoaiMon(int LoaiMon) {
         this.LoaiMon = LoaiMon;
     }
 
@@ -59,11 +65,11 @@ public class MonAn {
         this.DonViTinh = DonViTinh;
     }
 
-    public float getGiaTien() {
+    public double getGiaTien() {
         return GiaTien;
     }
 
-    public void setGiaTien(float GiaTien) {
+    public void setGiaTien(double GiaTien) {
         this.GiaTien = GiaTien;
     }
 
@@ -82,5 +88,12 @@ public class MonAn {
     public void setHinh(String Hinh) {
         this.Hinh = Hinh;
     }
-    
+
+    @Override
+    public String toString() {
+        return "" + TenMon;
+    }
+
+
+
 }
