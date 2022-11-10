@@ -8,6 +8,8 @@ import java.awt.Button;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import utils.Auth;
+import utils.MsgBox;
 
 /**
  *
@@ -350,11 +352,13 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDoanhThuActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyển vào nhân viên");
+        }else{
         NhanVienJInternalFrame nhanVien = new NhanVienJInternalFrame();
         pnlMain.removeAll();
         pnlMain.add(nhanVien).setVisible(true);
-
-        test("Nhân Viên");
+        test("Nhân Viên");}
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
@@ -556,4 +560,5 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlBackGround;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
+
 }
