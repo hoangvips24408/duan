@@ -113,5 +113,10 @@ public class NhanVien {
     public NhanVien() {
     }
 
+    @Override
+    public String toString() {
+        return ""+TenNV;
+    }
+
     
 }

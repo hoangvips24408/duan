@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
  */
 public class XImage {
     public static Image getAppIcon(){
-        URL url = XImage.class.getResource("/hinh/logo-removebg-preview.png");
+        URL url = XImage.class.getResource("/img/logo.jpg");
         return new ImageIcon(url).getImage();
     }
     public static void save(File src){

@@ -30,6 +30,7 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import utils.Auth;
 import utils.MsgBox;
+import utils.XImage;
 
 /**
  *
@@ -47,6 +48,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         DefaultColor = new Color(240, 151, 57);
         ClickedColor = new Color(238, 173, 14);
         checksinhnhat();
+        setIconImage(XImage.getAppIcon());
     }
 
     @SuppressWarnings("unchecked")
@@ -594,14 +596,14 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             if (ngaymay[1].equals(ngaysinhnhat[1])) {
                 double ngaythuc = Double.parseDouble(ngaymay[2]);
                 double ngaysinh = Double.parseDouble(ngaysinhnhat[2]);
-                if ((ngaysinh-ngaythuc)==3) {
-                    guiEmail(khachHang.getEmail());
+                if ((ngaysinh-ngaythuc)==1) {
+                    guiEmail(khachHang.getEmail(),khachHang.getHoTen());
                 }
 
             }
         }
     }
-       void guiEmail(String email) {
+       void guiEmail(String email,String hoten) {
         Properties p = new Properties();
         p.put("mail.smtp.auth", "true");
         p.put("mail.smtp.starttls.enable", "true");
@@ -610,7 +612,16 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         String senderEmail = "vihnhps24408@fpt.edu.vn";
         String toEmail = email;
         String subject = "Xin chào";
-        String body = "username của bạn là ";
+        String body = "TRI ÂN KHÁCH HÀNG NHÂN DỊP SINH NHẬT\n" +
+" \n" +
+"Thân gửi: \n" +hoten+
+"-     Chúc quý khách sinh nhật vui vẻ bên người thân và bạn bè\n" +
+" \n" +
+"-      Khi quý khách đến cửa hàng của chúng tôi sẽ được giảm giá 20% toàn bộ hóa đơn thanh toán\n" +
+" \n" +
+"Lưu ý: Khi thanh toán hóa đơn vui lòng xuất trình Email này để được giảm giá  \n" +
+" \n" +
+"Mọi thắc mắc vui lòng phản hồi lại email: vihnhps24408@fpt.edu.vn";
         String pass1 = "01629390148vi";
         Session s = Session.getInstance(p, new javax.mail.Authenticator() {
             @Override
@@ -625,17 +636,17 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             msg.setSubject(subject);
             msg.setText(body);
-//            MimeBodyPart mbp = new MimeBodyPart();
-//            mbp.setContent(body,"text/html; charset=utf-8");
-//            MimeBodyPart filepart = new MimeBodyPart();
-//            File file = new File(duongdan);
-//            FileDataSource fds =new FileDataSource(file);
-//            filepart.setDataHandler(new DataHandler(fds));
-//            filepart.setFileName(file.getName());
-//            MimeMultipart multipart = new MimeMultipart();
-//            multipart.addBodyPart(mbp);
-//            multipart.addBodyPart(filepart);
-//            msg.setContent(multipart);
+            MimeBodyPart mbp = new MimeBodyPart();
+            mbp.setContent(body,"text/html; charset=utf-8");
+            MimeBodyPart filepart = new MimeBodyPart();
+            File file = new File("staff\\sinhnhat.jpg");
+            FileDataSource fds =new FileDataSource(file);
+            filepart.setDataHandler(new DataHandler(fds));
+            filepart.setFileName(file.getName());
+            MimeMultipart multipart = new MimeMultipart();
+            multipart.addBodyPart(mbp);
+            multipart.addBodyPart(filepart);
+            msg.setContent(multipart);
             Transport.send(msg);
         } catch (MessagingException ex) {
             Logger.getLogger(NhanVienJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
