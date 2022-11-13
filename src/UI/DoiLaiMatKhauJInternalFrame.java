@@ -4,24 +4,30 @@
  */
 package UI;
 
+import DAO.NhanVienDAO;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import UI.TrangChuJFrame;
+import utils.Auth;
+import utils.MsgBox;
 /**
  *
  * @author Quan
  */
 public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
 
+    NhanVienDAO nvDAO = new NhanVienDAO();
+
+    
     public DoiLaiMatKhauJInternalFrame() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+        txtTenDangNhap.setText(Auth.user.getMaNV());
+        txtTenDangNhap.setEnabled(false);
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,6 +44,7 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
         lblMKM = new javax.swing.JLabel();
         txtMatKhauMoi = new javax.swing.JPasswordField();
         txtMatKhauCu = new javax.swing.JPasswordField();
+        btnDangXuat = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1028, 585));
 
@@ -55,6 +62,11 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
 
         btnCapNhat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnCapNhat.setText("Cập Nhật");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
 
         lblCaiDatMatKhau.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblCaiDatMatKhau.setForeground(new java.awt.Color(0, 153, 51));
@@ -69,6 +81,14 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
         lblMKM.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblMKM.setForeground(new java.awt.Color(0, 153, 0));
         lblMKM.setText("Mật Khẩu Mới");
+
+        btnDangXuat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnDangXuat.setText("Đăng Xuất");
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,16 +107,19 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(lblNLMK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTHT, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTenDangNhap)
-                    .addComponent(txtTenHienThi)
-                    .addComponent(txtMatKhauCu)
-                    .addComponent(txtMatKhauMoi)
-                    .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCapNhat)
-                        .addGap(106, 106, 106)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(66, 66, 66)
+                        .addComponent(btnDangXuat)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtTenDangNhap)
+                        .addComponent(txtTenHienThi)
+                        .addComponent(txtMatKhauCu)
+                        .addComponent(txtMatKhauMoi)
+                        .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,16 +148,31 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(lblNLMK)
                     .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
-                .addComponent(btnCapNhat)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCapNhat)
+                    .addComponent(btnDangXuat))
                 .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        if(MsgBox.confirm(this, "Bạn có muốn đăng xuất tài khoản?") == true) {
+            TrangChuJFrame.exit();
+        }
+    }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        if(valueDate() == true) {
+            doiMatKhau();
+        }
+    }//GEN-LAST:event_btnCapNhatActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnDangXuat;
     private javax.swing.JLabel lblCaiDatMatKhau;
     private javax.swing.JLabel lblMKC;
     private javax.swing.JLabel lblMKM;
@@ -147,4 +185,44 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTenDangNhap;
     private javax.swing.JTextField txtTenHienThi;
     // End of variables declaration//GEN-END:variables
+
+    public boolean valueDate() {
+        if (txtTenDangNhap.getText().isEmpty()) {
+            MsgBox.alert(this, "Tên đăng nhập không được bỏ trống!");
+            return false;
+        } else if (new String(txtMatKhauCu.getPassword()).isEmpty()) {
+            MsgBox.alert(this, "Mật khẩu không được bỏ trống!");
+            return false;
+        } else if (new String(txtMatKhauMoi.getPassword()).isEmpty()) {
+            MsgBox.alert(this, "Mật khẩu mới không được bỏ trống!");
+            return false;
+        } else if (new String(txtNhapLaiMK.getPassword()).isEmpty()) {
+            MsgBox.alert(this, "xác nhận mật khẩu không được bỏ trống!");
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public void doiMatKhau() {
+        String maNV = txtTenDangNhap.getText();
+        String matKhau = new String(txtMatKhauCu.getPassword());
+        String matKhauMoi = new String(txtMatKhauMoi.getPassword());
+        String xacNhanMatKhau = new String(txtNhapLaiMK.getPassword());
+
+        if (!maNV.equalsIgnoreCase(Auth.user.getMaNV())) {
+            MsgBox.alert(this, "Sai tên đăng nhập!");
+        } else if (!matKhau.equals(Auth.user.getMatKhau())) {
+            MsgBox.alert(this, "Sai mật khẩu!");
+        } else if (!xacNhanMatKhau.equals(matKhauMoi)) {
+            MsgBox.alert(this, "Xác nhận mật khẩu không đúng!");
+        } else {
+            Auth.user.setMatKhau(matKhauMoi);
+            System.out.println(Auth.user.getMatKhau());
+            nvDAO.update(Auth.user);
+            MsgBox.alert(this, "Đổi mật khẩu thành công!");
+        }
+    }
 }
+
+

@@ -49,6 +49,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         ClickedColor = new Color(238, 173, 14);
         checksinhnhat();
         setIconImage(XImage.getAppIcon());
+        khuyenMai();
     }
 
     @SuppressWarnings("unchecked")
@@ -533,6 +534,12 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         }
 
     }
+    
+    public void khuyenMai() {
+        TrangChuJInternalFrame trangChu = new TrangChuJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(trangChu).setVisible(true);
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -652,5 +659,9 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             Logger.getLogger(NhanVienJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+    }
+       
+       static void exit() {
+        System.exit(0);
     }
 }
