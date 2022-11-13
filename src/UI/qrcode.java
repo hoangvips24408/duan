@@ -151,7 +151,6 @@ public class qrcode extends javax.swing.JFrame implements Runnable, ThreadFactor
             if (result != null) {
 //                jTextField1.setText(result.getText());
                 NhanVien nhanvien = dao.selectById(result.getText());
-                System.out.println(nhanvien.getMaNV());
                 if (nhanvien == null) {
                     MsgBox.alert(this, "Sai mã");
                 } else {

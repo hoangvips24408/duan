@@ -639,7 +639,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             MimeBodyPart mbp = new MimeBodyPart();
             mbp.setContent(body,"text/html; charset=utf-8");
             MimeBodyPart filepart = new MimeBodyPart();
-            File file = new File("staff\\sinhnhat.jpg");
+            File file = new File("staff\\sinhnhat1");
             FileDataSource fds =new FileDataSource(file);
             filepart.setDataHandler(new DataHandler(fds));
             filepart.setFileName(file.getName());
