@@ -386,11 +386,12 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtPassWord.getPassword());
         NhanVien nhanvien = dao.selectById(username);
         if (nhanvien == null) {
-            MsgBox.alert(this, "Sai tên đăng nhập");
+            MsgBox.alert(this, "Username hoặc password sai !");
         } else if (!password.equals(nhanvien.getMatKhau())) {
-            MsgBox.alert(this, "Sai mật khẩu");
+            MsgBox.alert(this, "Username hoặc password sai !");
         } else {
             Auth.user = nhanvien;
+            MsgBox.alert(this, "Đăng nhập thành công ");
             TrangChuJFrame tc =new TrangChuJFrame();
             tc.setVisible(true);
             this.dispose();

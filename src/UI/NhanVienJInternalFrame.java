@@ -59,6 +59,8 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         lblTDN = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -162,8 +164,10 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblQuanLyNhanVien);
 
+        buttonGroup1.add(rdoNam);
         rdoNam.setText("Nam");
 
+        buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
 
         lblHinhAnh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -185,8 +189,10 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         lblTDN8.setForeground(new java.awt.Color(0, 153, 0));
         lblTDN8.setText("Chức Vụ");
 
+        buttonGroup2.add(rdoQuanLy);
         rdoQuanLy.setText("Quản lý");
 
+        buttonGroup2.add(rdoNhanVien);
         rdoNhanVien.setText("Nhân viên");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -362,6 +368,8 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
