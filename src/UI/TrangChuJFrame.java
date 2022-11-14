@@ -366,11 +366,16 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMonAnActionPerformed
 
     private void btnDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoanhThuActionPerformed
-        DoanhThuJInternalFrame doanhThu = new DoanhThuJInternalFrame();
-        pnlMain.removeAll();
-        pnlMain.add(doanhThu).setVisible(true);
+       
 
         test("Doanh Thu");
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền xem doanh thu");
+        } else {
+             DoanhThuJInternalFrame doanhThu = new DoanhThuJInternalFrame();
+        pnlMain.removeAll();
+        pnlMain.add(doanhThu).setVisible(true);
+        }
     }//GEN-LAST:event_btnDoanhThuActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
