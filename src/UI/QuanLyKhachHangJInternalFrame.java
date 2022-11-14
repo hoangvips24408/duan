@@ -347,9 +347,10 @@ public class QuanLyKhachHangJInternalFrame extends javax.swing.JInternalFrame {
     KhachHangDAO dao = new KhachHangDAO();
     int row = 0;
 
-    void filltable() {
+    void filltable() {  
         DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
         model.setRowCount(0);
+        
         List<KhachHang> khach = dao.selectAll();
         for (KhachHang kh : khach) {
             Object[] row = {kh.getMaKH(), kh.getHoTen(), kh.getEmail(), kh.getNgaySinh(), kh.getSDT(), kh.getDiaChi(), kh.isGioiTinh() ? "Nam" : "Nữ"};
