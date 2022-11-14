@@ -274,7 +274,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/KhuyenMai.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="kHUY&#x1ebe;N M&#xc3;I"/>
+                <Property name="text" type="java.lang.String" value="KHUY&#x1ebe;N M&#xc3;I"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>

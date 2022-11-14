@@ -162,7 +162,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         btnKhuyenMai.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnKhuyenMai.setForeground(new java.awt.Color(255, 255, 255));
         btnKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/KhuyenMai.png"))); // NOI18N
-        btnKhuyenMai.setText("kHUYẾN MÃI");
+        btnKhuyenMai.setText("KHUYẾN MÃI");
         btnKhuyenMai.setBorder(null);
         btnKhuyenMai.setHideActionText(true);
         btnKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

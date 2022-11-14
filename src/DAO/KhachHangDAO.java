@@ -26,7 +26,7 @@ public class KhachHangDAO extends FastFood<KhachHang, String> {
 
     @Override
     public void update(KhachHang entity) {
-        JdbcHelper.update(update_sql, entity.getMaKH(),entity.getHoTen(),entity.isGioiTinh(),entity.getEmail(),entity.getSDT(),entity.getDiaChi(),entity.getNgaySinh());
+        JdbcHelper.update(update_sql, entity.getHoTen(),entity.isGioiTinh(),entity.getEmail(),entity.getSDT(),entity.getDiaChi(),entity.getNgaySinh(), entity.getMaKH());
     }
 
     @Override
