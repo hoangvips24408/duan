@@ -6,31 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 import utils.JdbcHelper;
 
-
 /**
  *
  * @author Admin
  */
-public class NhanVienDAO extends FastFood<NhanVien, String>{
-    String insert_sql="INSERT INTO NhanVien(MaNV, TenNV, NgaySinh, GioiTinh, DiaChi, SDT, ChucVu, Hinh, MatKhau, Email) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    String update_sql="UPDATE NhanVien SET TenNV =?, NgaySinh =?, GioiTinh =?, DiaChi =?, SDT =?, ChucVu =?, Hinh =?, MatKhau =?, Email =? where MaNV = ?";
-    String delete_sql="DELETE FROM NhanVien where MaNV=?";
-    String select_all="SELECT * FROM NhanVien";
-    String select_byID="SELECT * FROM NhanVien where MaNV=?";
+public class NhanVienDAO extends FastFood<NhanVien, String> {
+
+    String insert_sql = "INSERT INTO NhanVien(MaNV, TenNV, NgaySinh, GioiTinh, DiaChi, SDT, ChucVu, Hinh, MatKhau, Email) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    String update_sql = "UPDATE NhanVien SET TenNV =?, NgaySinh =?, GioiTinh =?, DiaChi =?, SDT =?, ChucVu =?, Hinh =?, MatKhau =?, Email =? where MaNV = ?";
+    String delete_sql = "DELETE FROM NhanVien where MaNV=?";
+    String select_all = "SELECT * FROM NhanVien";
+    String select_byID = "SELECT * FROM NhanVien where MaNV=?";
 
     @Override
     public void insert(NhanVien entity) {
-        JdbcHelper.update(insert_sql, entity.getMaNV(),entity.getTenNV(),entity.getNgaySinh(),entity.isGioiTinh(),entity.getDiaChi(),entity.getSDT(),entity.isChucVu(),entity.getHinh(),entity.getMatKhau(),entity.getEmail());
+        JdbcHelper.update(insert_sql, entity.getMaNV(), entity.getTenNV(), entity.getNgaySinh(), entity.isGioiTinh(), entity.getDiaChi(), entity.getSDT(), entity.isChucVu(), entity.getHinh(), entity.getMatKhau(), entity.getEmail());
     }
 
     @Override
     public void update(NhanVien entity) {
-        JdbcHelper.update(update_sql,entity.getTenNV(),entity.getNgaySinh(),entity.isGioiTinh(),entity.getDiaChi(),entity.getSDT(),entity.isChucVu(),entity.getHinh(),entity.getMatKhau(),entity.getEmail(), entity.getMaNV());
+        JdbcHelper.update(update_sql, entity.getTenNV(), entity.getNgaySinh(), entity.isGioiTinh(), entity.getDiaChi(), entity.getSDT(), entity.isChucVu(), entity.getHinh(), entity.getMatKhau(), entity.getEmail(), entity.getMaNV());
     }
 
     @Override
     public void delete(String id) {
-        JdbcHelper.update(delete_sql,id);
+        JdbcHelper.update(delete_sql, id);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class NhanVienDAO extends FastFood<NhanVien, String>{
 
     @Override
     public NhanVien selectById(String key) {
-         List<NhanVien> list = selectBySql(select_byID, key);
+        List<NhanVien> list = selectBySql(select_byID, key);
         if (list.isEmpty()) {
             return null;
         }
@@ -71,6 +71,4 @@ public class NhanVienDAO extends FastFood<NhanVien, String>{
         }
         return list;
     }
-    
-    
 }

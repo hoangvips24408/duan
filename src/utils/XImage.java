@@ -34,4 +34,22 @@ public class XImage {
         File path = new File("staff",fileName);
         return  new ImageIcon(path.getAbsolutePath());
     }
+    
+    public static void save2(File src){
+        File dst = new File("build/classes/img",src.getName());
+        if (!dst.getParentFile().exists()) {
+            dst.getParentFile().mkdirs();
+        }
+        try {
+            Path from = Paths.get(src.getAbsolutePath());
+            Path to = Paths.get(dst.getAbsolutePath());
+            Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+        }
+    }
+    
+    public static ImageIcon read2(String fileName){
+        File path = new File("classes/img",fileName);
+        return  new ImageIcon(path.getAbsolutePath());
+    }
 }

@@ -25,6 +25,7 @@ public class TrangChuJInternalFrame extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+        khuyenMai();
     }
 
     public void khuyenMai() {
@@ -42,10 +43,14 @@ public class TrangChuJInternalFrame extends javax.swing.JInternalFrame {
             LocalDate startDate = LocalDate.of(Integer.valueOf(viTriBD[0]), Integer.valueOf(viTriBD[1]), Integer.valueOf(viTriBD[2]));
             LocalDate endDate = LocalDate.of(Integer.valueOf(viTriKT[0]), Integer.valueOf(viTriKT[1]), Integer.valueOf(viTriKT[2]));
 
-            if (now.isEqual(startDate) || now.isAfter(startDate) && now.isEqual(endDate) || now.isBefore(endDate)) {
-                lblHinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/" + km.getHinh())));
-            } else {
-                lblHinh.setText("Không có sự kiện nào đang được diễn ra");
+            if (now.getMonth().equals(startDate.getMonth())) {
+                if (now.getDayOfMonth() >= startDate.getDayOfMonth() && now.getDayOfMonth() <= endDate.getDayOfMonth()) {
+                    lblHinh.setText("");
+                    lblHinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/" + km.getHinh())));
+                    break;
+                } else {
+                    lblHinh.setText("Không có sự kiện nào đang được diễn ra");
+                }
             }
         }
     }
@@ -66,3 +71,25 @@ public class TrangChuJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblHinh;
     // End of variables declaration//GEN-END:variables
 }
+//    public void khuyenMai() {
+//        List<KhuyenMai> list = KMDAO.selectAll();
+//        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+//        String ngayMay = format.format(new Date());
+//        String[] ngayHienTai = ngayMay.split("-");
+//        for (KhuyenMai km : list) {
+//            String KT = km.getNgayKT();
+//            String[] viTriKT = KT.split("-");
+//            String BD = km.getNgayBD();
+//            String[] viTriBD = BD.split("-");
+//
+//            LocalDate now = LocalDate.of(Integer.valueOf(ngayHienTai[0]), Integer.valueOf(ngayHienTai[1]), Integer.valueOf(ngayHienTai[2]));
+//            LocalDate startDate = LocalDate.of(Integer.valueOf(viTriBD[0]), Integer.valueOf(viTriBD[1]), Integer.valueOf(viTriBD[2]));
+//            LocalDate endDate = LocalDate.of(Integer.valueOf(viTriKT[0]), Integer.valueOf(viTriKT[1]), Integer.valueOf(viTriKT[2]));
+//
+//            if (now.isEqual(startDate) || now.isAfter(startDate) && now.isEqual(endDate) || now.isBefore(endDate)) {
+//                lblHinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/" + km.getHinh())));
+//            } else {
+//                lblHinh.setText("Không có sự kiện nào đang được diễn ra");
+//            }
+//        }
+//    }

@@ -17,7 +17,11 @@ import java.sql.ResultSet;
 public class KhuyenMaiDAO {
 
     final String GET_ALL = "select * from KhuyenMai";
-
+    String INSERT_SQL = "insert into KhuyenMai values (?, ?, ?, ?, ?)";
+    String UPDATE_SQL = "update KhuyenMai set TenKM = ?, NgayBatDau = ?, NgayKetThuc = ?, Hinh = ? where MaKM = ?";
+    String DELETE_SQL = "DELETE FROM KhuyenMai WHERE MaKM = ?";
+    String SELECT_BY_ID_SQL = "SELECT * FROM KhuyenMai WHERE MaKM = ?";
+    
     public List<KhuyenMai> selectBySql(String sql, Object... args) {
         List<KhuyenMai> list = new ArrayList<>();
         try {
@@ -39,5 +43,26 @@ public class KhuyenMaiDAO {
 
     public List<KhuyenMai> selectAll() {
         return selectBySql(GET_ALL);
+    }
+
+    public void insert(KhuyenMai khuyenMai) {
+        JdbcHelper.update(INSERT_SQL, khuyenMai.getMaKM(), khuyenMai.getTenKM(), khuyenMai.getNgayBD(),
+                khuyenMai.getNgayKT(), khuyenMai.getHinh());
+    }
+
+    public void update(KhuyenMai km) {
+        JdbcHelper.update(UPDATE_SQL, km.getTenKM(), km.getNgayBD(), km.getNgayKT(), km.getHinh(), km.getMaKM());
+    }
+
+    public void delete(String id) {
+        JdbcHelper.update(DELETE_SQL, id);
+    }
+    
+    public KhuyenMai selectByID(String maKM) {
+        List<KhuyenMai> list = this.selectBySql(SELECT_BY_ID_SQL, maKM);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }

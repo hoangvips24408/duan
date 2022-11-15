@@ -16,10 +16,6 @@ import javax.swing.border.Border;
 import utils.Auth;
 import utils.MsgBox;
 
-/**
- *
- * @author ACER
- */
 public class Login extends javax.swing.JFrame {
 
     String user = "sa";
@@ -32,7 +28,8 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Login");
-
+        txtUserName.setText("ps1");
+        txtPassWord.setText("321");
     }
 
     @SuppressWarnings("unchecked")
