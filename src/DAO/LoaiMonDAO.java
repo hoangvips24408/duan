@@ -83,4 +83,26 @@ public class LoaiMonDAO {
                 + "where TenLoai = ?";
         return this.selectBYSQL(sql, tenLoai);
     }
+     private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+        try {
+            List<Object[]> list = new ArrayList<>();
+            ResultSet rs = JdbcHelper.query(sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
+                for (int i = 0; i < cols.length; i++) {
+                    vals[i] = rs.getObject(cols[i]);
+                }
+                list.add(vals);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+     public List<Object[]> getMon(String tenloai) {
+        String sql = "{CALL sp_monan(?)}";
+        String[] cols = {"Mã món", "Tên món", "Đơn vị tính", "Giá bán"};
+        return getListOfArray(sql, cols, tenloai);
+    }
 }

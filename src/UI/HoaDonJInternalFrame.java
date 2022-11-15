@@ -4,14 +4,19 @@
  */
 package UI;
 
+import DAO.LoaiMonDAO;
+import Entity.LoaiMonAn;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Quan
  */
 public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
-
+    LoaiMonDAO daoloai = new LoaiMonDAO();
     /**
      * Creates new form HoaDonJInternalFrame
      */
@@ -20,6 +25,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+        fillcombobox();
     }
     
     @SuppressWarnings("unchecked")
@@ -76,6 +82,12 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane5.setViewportView(tblTatCa);
+
+        cboMaLoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboMaLoaiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,6 +205,11 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cboMaLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMaLoaiActionPerformed
+        // TODO add your handling code here:
+        filltable();
+    }//GEN-LAST:event_cboMaLoaiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThanhToan;
@@ -213,4 +230,22 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtThanhToan1;
     private javax.swing.JTextField txtTongTien1;
     // End of variables declaration//GEN-END:variables
+void fillcombobox(){
+    DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaLoai.getModel();
+    model.removeAllElements();
+    List<LoaiMonAn> list = daoloai.selectALL();
+    for (LoaiMonAn loaiMonAn : list) {
+        model.addElement(loaiMonAn);
+    }
+    filltable();
+}
+void filltable(){
+    DefaultTableModel model = (DefaultTableModel) tblTatCa.getModel();
+    model.setRowCount(0);
+    LoaiMonAn loai = (LoaiMonAn) cboMaLoai.getSelectedItem();
+    List<Object[]> mon = daoloai.getMon(loai.getTenLoai());
+    for (Object[] objects : mon) {
+        model.addRow(objects);
+    }
+}
 }
