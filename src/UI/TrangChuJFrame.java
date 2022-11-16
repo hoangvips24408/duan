@@ -621,7 +621,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         p.put("mail.smtp.starttls.enable", "true");
         p.put("mail.smtp.host", "smtp.gmail.com");
         p.put("mail.smtp.port", 587);
-        String senderEmail = "vihnhps24408@fpt.edu.vn";
+        String senderEmail = "";
         String toEmail = email;
         String subject = "Xin chào";
         String body = "TRI ÂN KHÁCH HÀNG NHÂN DỊP SINH NHẬT\n" +

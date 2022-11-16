@@ -18,9 +18,6 @@ import utils.MsgBox;
 
 public class Login extends javax.swing.JFrame {
 
-    String user = "sa";
-    String password = "123";
-    String url = "";
 
     public Login() {
         initComponents();
@@ -28,8 +25,6 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Login");
-        txtUserName.setText("ps1");
-        txtPassWord.setText("321");
     }
 
     @SuppressWarnings("unchecked")
@@ -241,25 +236,21 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-//        if (valuDate() == true) {
-//            TrangChuJFrame tc =new TrangChuJFrame();
-            
+       if (valuDate() == true){
             login();
-//            tc.setVisible(true);
-//            this.dispose();
-//        }
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblHideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHideMousePressed
-//        lblHide.setVisible(false);
-//        lblView.setVisible(true);
-//        txtPassWord.setEchoChar((char) 0);
+        lblHide.setVisible(false);
+        lblView.setVisible(true);
+        txtPassWord.setEchoChar((char) 0);
     }//GEN-LAST:event_lblHideMousePressed
 
     private void lblViewMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewMousePressed
-//        lblHide.setVisible(true);
-//        lblView.setVisible(false);
-//        txtPassWord.setEchoChar('*');
+        lblHide.setVisible(true);
+        lblView.setVisible(false);
+        txtPassWord.setEchoChar('*');
     }//GEN-LAST:event_lblViewMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -272,14 +263,14 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnQRActionPerformed
 
-//    public boolean valuDate() {
-//        if (txtPassWord.getPassword().equals("") || txtUserName.getText().equals("")) {
-//            JOptionPane.showMessageDialog(this, "vui long nhap day du thong tin!");
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
+    public boolean valuDate() {
+        if (txtPassWord.getPassword().equals("") || txtUserName.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "vui long nhap day du thong tin!");
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -353,30 +344,6 @@ public class Login extends javax.swing.JFrame {
         return true;
     }
 
-    //check Login
-    public void checkLogin() {
-        if (check()) {
-            try (
-                    Connection con = DriverManager.getConnection(url, user, password); Statement st = con.createStatement();) {
-                String sql = "SELECT * FROM NhanVien";
-                ResultSet rs = st.executeQuery(sql);
-                while (rs.next()) {
-                    if (txtUserName.getText().equals(rs.getString(1).trim())) {     // số cột trong sql ở đây
-                        if (txtPassWord.getText().equals(rs.getString(2).trim())) {
-
-                        }
-
-                    }
-
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    // = = = == =  == = =  CHưa xonggggg  =+++= = = = = 
     //login
     void login() {
         String username = txtUserName.getText();
