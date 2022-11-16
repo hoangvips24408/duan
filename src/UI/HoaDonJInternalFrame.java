@@ -16,18 +16,20 @@ import javax.swing.table.DefaultTableModel;
  * @author Quan
  */
 public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
+
     LoaiMonDAO daoloai = new LoaiMonDAO();
+
     /**
      * Creates new form HoaDonJInternalFrame
      */
     public HoaDonJInternalFrame() {
         initComponents();
-        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         fillcombobox();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -52,20 +54,36 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Mã món", "Tên món", "Giá tiền", "Số lượng", "Thành tiền"
             }
         ));
+        jTable2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTable2AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable2KeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         btnThanhToan.setBackground(new java.awt.Color(181, 208, 221));
         btnThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnThanhToan.setText("Thanh toán");
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
@@ -81,6 +99,11 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
                 "Mã món", "Tên món", "Đơn vị tính", "Giá bán"
             }
         ));
+        tblTatCa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblTatCaMousePressed(evt);
+            }
+        });
         jScrollPane5.setViewportView(tblTatCa);
 
         cboMaLoai.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +149,11 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         btnXoa.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
         btnXoa.setText("Xóa món");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel18.setText("MaKH");
@@ -210,6 +238,33 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         filltable();
     }//GEN-LAST:event_cboMaLoaiActionPerformed
 
+    private void tblTatCaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTatCaMousePressed
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            filltablehoadon();
+        }
+    }//GEN-LAST:event_tblTatCaMousePressed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        xoamon();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        // TODO add your handling code here:
+ 
+    }//GEN-LAST:event_btnThanhToanActionPerformed
+
+    private void jTable2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable2AncestorAdded
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTable2AncestorAdded
+
+    private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyReleased
+        // TODO add your handling code here:
+        sua();
+    }//GEN-LAST:event_jTable2KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThanhToan;
@@ -230,22 +285,46 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtThanhToan1;
     private javax.swing.JTextField txtTongTien1;
     // End of variables declaration//GEN-END:variables
-void fillcombobox(){
-    DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaLoai.getModel();
-    model.removeAllElements();
-    List<LoaiMonAn> list = daoloai.selectALL();
-    for (LoaiMonAn loaiMonAn : list) {
-        model.addElement(loaiMonAn);
+void fillcombobox() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaLoai.getModel();
+        model.removeAllElements();
+        List<LoaiMonAn> list = daoloai.selectALL();
+        for (LoaiMonAn loaiMonAn : list) {
+            model.addElement(loaiMonAn);
+        }
+        filltable();
     }
-    filltable();
-}
-void filltable(){
-    DefaultTableModel model = (DefaultTableModel) tblTatCa.getModel();
-    model.setRowCount(0);
-    LoaiMonAn loai = (LoaiMonAn) cboMaLoai.getSelectedItem();
-    List<Object[]> mon = daoloai.getMon(loai.getTenLoai());
-    for (Object[] objects : mon) {
-        model.addRow(objects);
+
+    void filltable() {
+        DefaultTableModel model = (DefaultTableModel) tblTatCa.getModel();
+        model.setRowCount(0);
+        LoaiMonAn loai = (LoaiMonAn) cboMaLoai.getSelectedItem();
+        List<Object[]> mon = daoloai.getMon(loai.getTenLoai());
+        for (Object[] objects : mon) {
+            model.addRow(objects);
+        }
     }
-}
+
+    void filltablehoadon() {
+        int row = tblTatCa.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        Object[] chonmon = new Object[]{tblTatCa.getValueAt(row, 0), tblTatCa.getValueAt(row, 1), tblTatCa.getValueAt(row, 3), 1, tblTatCa.getValueAt(row, 3)};
+        model.addRow(chonmon);
+    }
+
+    void xoamon() {
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        int row = jTable2.getSelectedRow();
+        model.removeRow(row);
+
+    }
+
+    void sua(){
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        int row = jTable2.getSelectedRow();
+        float soluong = Float.parseFloat(jTable2.getValueAt(row, 3).toString());
+        float tien = Float.parseFloat(jTable2.getValueAt(row, 2).toString());
+        float tongtien = soluong*tien;
+        model.setValueAt(tongtien, row, 4);
+    }
 }
