@@ -4,7 +4,6 @@
  */
 package DAO;
 
-
 import Entity.MonAn;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -27,6 +26,8 @@ public class MonAnDAO {
     String SELECT_LOAI_MON = "select MaLoai\n"
             + "from LoaiMon";
     String select_byKey = "SELECT * FROM MonAn where TenMon like ?";
+    String select_bymaloai = "select * from LoaiMon\n"
+            + "where MaLoai = ?";
 
     public void insert(MonAn monAn) {
         JdbcHelper.update(INSERT_SQL, monAn.getMaMA(), monAn.getTenMon(), monAn.getLoaiMon(),
@@ -93,7 +94,7 @@ public class MonAnDAO {
             throw new RuntimeException(e);
         }
     }
-    
+
     public static void main(String[] args) {
         MonAnDAO dao = new MonAnDAO();
         List<MonAn> list = dao.selectALL();
@@ -120,11 +121,12 @@ public class MonAnDAO {
                 + "group by hd.MaHD, TenMon, ct.SoLuong, NgayXuat";
         return this.selectBYSQL(sql, tenMon);
     }
-    
+
     public List<Object[]> getTenMon(String tenmon) {
         String sql = "{CALL tenmon(?)}";
         String[] cols = {"MaHD", "TenMon", "SoLuong", "Thành tiền", "NgayXuat"};
         return getListOfArray(sql, cols, tenmon);
     }
 
+    
 }

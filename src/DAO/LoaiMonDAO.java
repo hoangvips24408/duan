@@ -16,28 +16,27 @@ import utils.JdbcHelper;
  * @author lenovo
  */
 public class LoaiMonDAO {
-    String insert_sql="INSERT INTO LoaiMon (MaLoai,TenLoai) VALUES (?,?)";
-    String update_sql="UPDATE LoaiMon SET TenLoai =? where MaLoai=?";
-    String delete_sql="DELETE FROM LoaiMon where MaLoai=?";
-    String SELECT_BY_ID="SELECT * FROM LoaiMon where MaLoai=?";
+
+    String insert_sql = "INSERT INTO LoaiMon (MaLoai,TenLoai) VALUES (?,?)";
+    String update_sql = "UPDATE LoaiMon SET TenLoai =? where MaLoai=?";
+    String delete_sql = "DELETE FROM LoaiMon where MaLoai=?";
+    String SELECT_BY_ID = "SELECT * FROM LoaiMon where MaLoai=?";
     String SELECT_MALOAI = "select MaLoai\n"
             + "from LoaiMon";
     String SELECT_ALL_SQL = "select * from LoaiMon";
-    
+
     public void insert(LoaiMonAn entity) {
-        JdbcHelper.update(insert_sql, entity.getMaLoai(),entity.getTenLoai());
+        JdbcHelper.update(insert_sql, entity.getMaLoai(), entity.getTenLoai());
     }
 
-  
     public void update(LoaiMonAn entity) {
-        JdbcHelper.update(update_sql,entity.getTenLoai(),entity.getMaLoai());
+        JdbcHelper.update(update_sql, entity.getTenLoai(), entity.getMaLoai());
     }
 
-    
     public void delete(Integer id) {
-        JdbcHelper.update(delete_sql,id);
+        JdbcHelper.update(delete_sql, id);
     }
-    
+
     protected List<LoaiMonAn> selectBYSQL(String sql, Object... args) {
         List<LoaiMonAn> list = new ArrayList<LoaiMonAn>();
         try {
@@ -54,36 +53,34 @@ public class LoaiMonDAO {
             throw new RuntimeException(e);
         }
     }
-    
+
     public List<LoaiMonAn> selectALL() {
         return this.selectBYSQL(SELECT_ALL_SQL);
     }
-    
+
     public LoaiMonAn selectById(Integer key) {
-         List<LoaiMonAn> list = selectBYSQL(SELECT_BY_ID, key);
+        List<LoaiMonAn> list = selectBYSQL(SELECT_BY_ID, key);
         if (list.isEmpty()) {
             return null;
         }
         return list.get(0);
     }
-    
-    
-    
+
     public static void main(String[] args) {
         LoaiMonDAO dao = new LoaiMonDAO();
         List<LoaiMonAn> list = dao.selectALL();
-        for (LoaiMonAn m : list) {
-            System.out.println(m);
-        }
+        
+        
     }
-    
+
     public List<LoaiMonAn> selectByTenLoai(String tenLoai) {
         String sql = "select *\n"
                 + "from MonAn\n"
                 + "where TenLoai = ?";
         return this.selectBYSQL(sql, tenLoai);
     }
-     private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         try {
             List<Object[]> list = new ArrayList<>();
             ResultSet rs = JdbcHelper.query(sql, args);
@@ -100,9 +97,12 @@ public class LoaiMonDAO {
             throw new RuntimeException(e);
         }
     }
-     public List<Object[]> getMon(String tenloai) {
+
+    public List<Object[]> getMon(String tenloai) {
         String sql = "{CALL sp_monan(?)}";
         String[] cols = {"Mã món", "Tên món", "Đơn vị tính", "Giá bán"};
         return getListOfArray(sql, cols, tenloai);
     }
+
+    
 }
