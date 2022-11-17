@@ -25,6 +25,7 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Login");
+        txtUserName.requestFocus();
     }
 
     @SuppressWarnings("unchecked")
@@ -63,6 +64,11 @@ public class Login extends javax.swing.JFrame {
         txtUserName.setBackground(new java.awt.Color(182, 212, 196));
         txtUserName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtUserName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtUserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserNameActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,6 +108,11 @@ public class Login extends javax.swing.JFrame {
         txtPassWord.setBackground(new java.awt.Color(182, 212, 196));
         txtPassWord.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPassWord.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtPassWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassWordActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -262,6 +273,22 @@ public class Login extends javax.swing.JFrame {
         qr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnQRActionPerformed
+
+    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
+        // TODO add your handling code here:
+        String key = evt.getActionCommand();
+        if(key.endsWith("")){
+            txtPassWord.requestFocus();
+        }
+    }//GEN-LAST:event_txtUserNameActionPerformed
+
+    private void txtPassWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassWordActionPerformed
+        // TODO add your handling code here:
+        String key = evt.getActionCommand();
+        if(key.endsWith("")){
+            login();
+        }
+    }//GEN-LAST:event_txtPassWordActionPerformed
 
     public boolean valuDate() {
         if (txtPassWord.getPassword().equals("") || txtUserName.getText().equals("")) {

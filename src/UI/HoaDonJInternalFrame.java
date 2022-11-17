@@ -52,6 +52,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
         txtMaKH = new javax.swing.JTextField();
 
+        jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 51)));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
