@@ -5,13 +5,18 @@
 package UI;
 
 import DAO.KhachHangDAO;
+import DAO.KhuyenMaiDAO;
 import Entity.KhachHang;
+import Entity.KhuyenMai;
 import com.sun.mail.imap.ACL;
 import java.awt.Button;
 import java.awt.Color;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -27,6 +32,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import utils.Auth;
 import utils.MsgBox;
@@ -51,13 +57,14 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         setIconImage(XImage.getAppIcon());
         khuyenMai();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnlBackGround = new javax.swing.JPanel();
         pnlMain = new javax.swing.JPanel();
+        lblHinh = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnTrangChu = new javax.swing.JButton();
         btnChiTietHoaDon = new javax.swing.JButton();
@@ -69,6 +76,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         btnNhanVien = new javax.swing.JButton();
         btnKhachHang = new javax.swing.JButton();
         btnTaiKhoan = new javax.swing.JButton();
+        btnTaiKhoan1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,15 +84,18 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         pnlMain.setBackground(new java.awt.Color(204, 204, 204));
         pnlMain.setPreferredSize(new java.awt.Dimension(1028, 585));
 
+        lblHinh.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblHinh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1028, Short.MAX_VALUE)
+            .addComponent(lblHinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
+            .addComponent(lblHinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(240, 151, 57));
@@ -235,6 +246,19 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             }
         });
 
+        btnTaiKhoan1.setBackground(new java.awt.Color(240, 151, 57));
+        btnTaiKhoan1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnTaiKhoan1.setForeground(new java.awt.Color(255, 255, 255));
+        btnTaiKhoan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Xoa.png"))); // NOI18N
+        btnTaiKhoan1.setText("DANG XUAT");
+        btnTaiKhoan1.setBorder(null);
+        btnTaiKhoan1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTaiKhoan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaiKhoan1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -251,7 +275,8 @@ public class TrangChuJFrame extends javax.swing.JFrame {
                     .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTaiKhoan1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -263,21 +288,23 @@ public class TrangChuJFrame extends javax.swing.JFrame {
                 .addComponent(btnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnChiTietHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMonAn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/food.jpg"))); // NOI18N
@@ -298,7 +325,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             .addGroup(pnlBackGroundLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE))
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -320,7 +347,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         TrangChuJInternalFrame trangChu = new TrangChuJInternalFrame();
         pnlMain.removeAll();
         pnlMain.add(trangChu).setVisible(true);
-
+        thongTinKhuyenMai();
         test("Trang Chủ");
     }//GEN-LAST:event_btnTrangChuActionPerformed
 
@@ -422,6 +449,14 @@ public class TrangChuJFrame extends javax.swing.JFrame {
 //        btnKhachHang.setBorder(null);
 //        btnNhanVien.setBorder(border);
     }//GEN-LAST:event_btnNhanVienMouseEntered
+
+    private void btnTaiKhoan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiKhoan1ActionPerformed
+        if(MsgBox.confirm(this, "Bạn có muốn đăng xuất tài khoản?") == true) {
+            this.dispose();
+            Login login = new Login();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_btnTaiKhoan1ActionPerformed
 
     public void test(String x) {
         String getText = x;
@@ -588,9 +623,11 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnMonAn;
     private javax.swing.JButton btnNhanVien;
     private javax.swing.JButton btnTaiKhoan;
+    private javax.swing.JButton btnTaiKhoan1;
     private javax.swing.JButton btnTrangChu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblHinh;
     private javax.swing.JPanel pnlBackGround;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
@@ -665,10 +702,39 @@ public class TrangChuJFrame extends javax.swing.JFrame {
 
         }
     }
-       
-       static void exit() {
-        System.exit(0);
+    
+    KhuyenMaiDAO KMDAO = new KhuyenMaiDAO();
+    public void thongTinKhuyenMai() {
+        List<KhuyenMai> list = KMDAO.selectAll();
+        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+        String ngayMay = format.format(new Date());
+        String[] ngayHienTai = ngayMay.split("-");
+        int width = lblHinh.getWidth();
+        int height = lblHinh.getHeight();
+        for (KhuyenMai km : list) {
+            String KT = km.getNgayKT();
+            String[] viTriKT = KT.split("-");
+            String BD = km.getNgayBD();
+            String[] viTriBD = BD.split("-");
+
+            LocalDate now = LocalDate.of(Integer.valueOf(ngayHienTai[0]), Integer.valueOf(ngayHienTai[1]), Integer.valueOf(ngayHienTai[2]));
+            LocalDate startDate = LocalDate.of(Integer.valueOf(viTriBD[0]), Integer.valueOf(viTriBD[1]), Integer.valueOf(viTriBD[2]));
+            LocalDate endDate = LocalDate.of(Integer.valueOf(viTriKT[0]), Integer.valueOf(viTriKT[1]), Integer.valueOf(viTriKT[2]));
+
+            if (now.getMonth().equals(startDate.getMonth())) {
+                if (now.getDayOfMonth() >= startDate.getDayOfMonth() && now.getDayOfMonth() <= endDate.getDayOfMonth()) {
+                    lblHinh.setText("");
+                    ImageIcon icon = new ImageIcon(XImage.read(km.getHinh()).getImage().getScaledInstance(width, height, 0));
+                    lblHinh.setIcon(icon);
+                    break;
+                } else {
+                    lblHinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/KM0.png")));
+                }
+            }
+        }
     }
-       
+    
+    
+     
        
 }

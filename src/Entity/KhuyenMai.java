@@ -9,11 +9,25 @@ package Entity;
  * @author Quan
  */
 public class KhuyenMai {
+
     String maKM;
     String tenKM;
     String ngayBD;
-    String ngayKT;    
+    String ngayKT;
     String hinh;
+    String giaKhuyenMai;
+
+    public String getGiaKhuyenMai() {
+        return giaKhuyenMai;
+    }
+
+    public void setGiaKhuyenMai(String giaKhuyenMai) {
+        this.giaKhuyenMai = giaKhuyenMai;
+    }
+
+    public KhuyenMai(String giaKhuyenMai) {
+        this.giaKhuyenMai = giaKhuyenMai;
+    }
 
     public KhuyenMai() {
     }
@@ -66,7 +80,4 @@ public class KhuyenMai {
         this.hinh = hinh;
     }
 
-    
-    
-    
 }

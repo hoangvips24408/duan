@@ -158,9 +158,9 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        if(MsgBox.confirm(this, "Bạn có muốn đăng xuất tài khoản?") == true) {
-            TrangChuJFrame.exit();
-        }
+//        if(MsgBox.confirm(this, "Bạn có muốn đăng xuất tài khoản?") == true) {
+//            TrangChuJFrame.exit();
+//        }
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
