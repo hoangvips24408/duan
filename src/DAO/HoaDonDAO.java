@@ -13,7 +13,7 @@ import utils.JdbcHelper;
  */
 public class HoaDonDAO extends FastFood<HoaDon, Integer> {
 
-    String insert_sql = "INSERT INTO HoaDon (MaHD, NgayXuat, TongTien, MaNV, MaKH) VALUES (?,?,?,?,?)";
+    String insert_sql = "INSERT INTO HoaDon (NgayXuat, TongTien, MaNV, MaKH) VALUES (?,?,?,?)";
     String update_sql = "UPDATE HoaDon SET NgayXuat =?, TongTien =?, MaNV =?, MaKH =? where MaHD = ?";
     String delete_sql = "DELETE FROM HoaDon where MaHD=?";
     String select_all = "SELECT * FROM HoaDon";
@@ -21,7 +21,7 @@ public class HoaDonDAO extends FastFood<HoaDon, Integer> {
 
     @Override
     public void insert(HoaDon entity) {
-        JdbcHelper.update(insert_sql, entity.getMaHD(), entity.getNgayXuat(), entity.getTongTien(), entity.getMaNV(), entity.getMaKH());
+        JdbcHelper.update(insert_sql, entity.getNgayXuat(), entity.getTongTien(), entity.getMaNV(), entity.getMaKH());
     }
 
     @Override

@@ -18,6 +18,7 @@ public class KhachHangDAO extends FastFood<KhachHang, String> {
     String delete_sql = "DELETE FROM KhachHang where MaKH=?";
     String select_all = "SELECT * FROM KhachHang";
     String select_byID = "SELECT * FROM KhachHang where MaKH=?";
+     String select_byKey = "SELECT * FROM KhachHang where HoTen like ?";
 
     @Override
     public void insert(KhachHang entity) {
@@ -68,6 +69,10 @@ public class KhachHangDAO extends FastFood<KhachHang, String> {
             throw new RuntimeException();
         }
         return list;
+    }
+    
+     public List<KhachHang> selectByKeyword(String key) {
+        return selectBySql(select_byKey, "%" + key + "%");
     }
 
 }
