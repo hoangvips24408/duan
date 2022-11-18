@@ -69,4 +69,31 @@ public class HoaDonDAO extends FastFood<HoaDon, Integer> {
         return list;
     }
 
+    public List<HoaDon> selectBySql1() {
+        List<HoaDon> list = new ArrayList<>();
+        String sql = "select top 1 MaHD\n"
+                + "	from HoaDon\n"
+                + "	order by MaHD DESC";
+        try {
+            ResultSet rs = JdbcHelper.query(sql);
+            while (rs.next()) {
+                HoaDon entity = new HoaDon();
+                entity.setMaHD(rs.getInt("MaHD"));
+                list.add(entity);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException();
+
+        }
+        return list;
+    }
+    
+    public static void main(String[] args) {
+        HoaDonDAO d = new HoaDonDAO();
+        List<HoaDon> list = d.selectBySql1();
+        for (HoaDon hoaDon : list) {
+            System.out.println(hoaDon.getMaHD());
+        }
+    }
+
 }

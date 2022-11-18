@@ -11,7 +11,7 @@ import utils.JdbcHelper;
  * @author Admin
  */
 public class ChitietDAO {
-    String insert_sql = "insert into ChiTietHoaDon set MaHD = ? MaMA = ?, SoLuong =?, ThanhTien = ? values (?, ?, ?, ?)";
+    String insert_sql = "insert into ChiTietHoaDon (MaHD, MaMA, SoLuong, ThanhTien) values (?, ?, ?, ?)";
     //String update_sql = "UPDATE HoaDon SET NgayXuat =?, TongTien =?, MaNV =?, MaKH =? where MaHD = ?";
     //String delete_sql = "DELETE FROM HoaDon where MaHD=?";
     //String select_all = "SELECT * FROM HoaDon";
@@ -37,4 +37,7 @@ public class ChitietDAO {
     public void insert(ChiTietHoaDon entity) {
         JdbcHelper.update(insert_sql, entity.getMaHD(), entity.getMaMA(), entity.getSoLuong(), entity.getThanhTien());
     }
+    
+    
+   
 }

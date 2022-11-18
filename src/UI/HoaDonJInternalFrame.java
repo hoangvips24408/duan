@@ -37,7 +37,6 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
     HoaDonDAO dao = new HoaDonDAO();
     ChiTietHoaDon ct = new ChiTietHoaDon();
     ChitietDAO ctdao = new ChitietDAO();
-    int maHD = 14;
 
     public HoaDonJInternalFrame() {
         initComponents();
@@ -49,6 +48,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         giaKhuyenMai();
 
     }
+    int maHD;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -324,9 +324,8 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
-        ThemHoaDon();
-        ThemChiTietHoaDon();
-        maHD++;
+            ThemHoaDon();
+            GetFormChiTiet();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblChiTietAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblChiTietAncestorAdded
@@ -513,25 +512,30 @@ void fillcombobox() {
         }
     }
 
-    public ChiTietHoaDon GetFormChiTiet() {
+    public void GetFormChiTiet() {
+        List<HoaDon> list = dao.selectBySql1();
+        for (HoaDon hoaDon : list) {
+             maHD = hoaDon.getMaHD();
+        }
         ChiTietHoaDon ct = new ChiTietHoaDon();
         int n = tblChiTiet.getRowCount();
-        int i = tblChiTiet.getSelectedRow();
-        ct.setMaHD(13);
-        ct.setMaMA(tblChiTiet.getValueAt(i, 0).toString());
-        ct.setSoLuong(Integer.parseInt(tblChiTiet.getValueAt(i, 3).toString()));
-        ct.setThanhTien(Float.parseFloat(tblChiTiet.getValueAt(i, 5).toString()));
-        return ct;
-    }
-
-    public void ThemChiTietHoaDon() {
-        ChiTietHoaDon ct = GetFormChiTiet();
-        int n = tblChiTiet.getRowCount();
-        try {
+        for (int i = 0; i < n; i++) {
+            ct.setMaHD(maHD);
+            ct.setMaMA(tblChiTiet.getValueAt(i, 0).toString());
+            ct.setSoLuong(Integer.parseInt(tblChiTiet.getValueAt(i, 3).toString()));
+            ct.setThanhTien(Float.parseFloat(tblChiTiet.getValueAt(i, 4).toString()));
             ctdao.insert(ct);
-            MsgBox.alert(this, "Thêm chi tiết thành công");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
+
+//    public void ThemChiTietHoaDon() {
+//        ChiTietHoaDon ct = GetFormChiTiet();
+//        try {
+//            ctdao.insert(ct);
+//            MsgBox.alert(this, "Thêm chi tiết thành công");
+//        } catch (Exception e) {
+//            MsgBox.alert(this, "Thêm chi tiết thất bại");
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

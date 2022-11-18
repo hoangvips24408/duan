@@ -62,5 +62,12 @@ public class HoaDon {
     public void setMaKH(String MaKH) {
         this.MaKH = MaKH;
     }
+
+    @Override
+    public String toString() {
+        return "" +MaHD;
+    }
+    
+    
     
 }
