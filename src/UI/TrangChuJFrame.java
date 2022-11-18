@@ -669,4 +669,6 @@ public class TrangChuJFrame extends javax.swing.JFrame {
        static void exit() {
         System.exit(0);
     }
+       
+       
 }

@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        Init();
         setSize(900, 600);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -388,6 +389,11 @@ public class Login extends javax.swing.JFrame {
             this.dispose();
         }
         
+    }
+    
+    public void Init() {
+        new Chao(this, true).setVisible(true);
+ 
     }
 
 }
