@@ -186,7 +186,7 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(txtTongTienHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         tabs.addTab("MÓN ĂN ", jPanel2);
@@ -310,7 +310,7 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
         lblChonTenNhanVien1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblChonTenNhanVien1.setText("Chọn Thời Gian Cần Xem");
 
-        cboThangXem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        cboThangXem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng 1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         cboThangXem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboThangXemActionPerformed(evt);
