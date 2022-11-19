@@ -33,6 +33,10 @@ where HoaDon.MaHD=$P{mahd}]]>
 				</textElement>
 				<text><![CDATA[HÓA ĐƠN]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="53" height="38" uuid="2e37fad6-7f7d-401f-a15f-260fd160381d"/>
+				<imageExpression><![CDATA["D:\\TÀI LIEU HOC\\TÀI LIEU HOC\\duan1\\Eatery (1)\\FastFood\\staff\\logo.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
