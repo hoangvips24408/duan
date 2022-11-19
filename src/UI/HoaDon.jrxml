@@ -107,8 +107,8 @@ where HoaDon.MaHD=$P{mahd}]]>
 				<textFieldExpression><![CDATA[$F{TongTien}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="392" y="31" width="57" height="20" uuid="40bb24f9-5261-4333-86ae-9e8e417e9dbf"/>
-				<text><![CDATA[Khuến mãi:]]></text>
+				<reportElement x="381" y="31" width="68" height="20" uuid="40bb24f9-5261-4333-86ae-9e8e417e9dbf"/>
+				<text><![CDATA[Khuyến mãi:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="480" y="31" width="15" height="20" uuid="79879084-b9e7-4a9f-badc-4e6f66b98402"/>
