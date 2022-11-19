@@ -14,6 +14,7 @@ import Entity.HoaDon;
 import Entity.KhachHang;
 import Entity.KhuyenMai;
 import Entity.LoaiMonAn;
+import Entity.MonAn;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -357,6 +358,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ThemHoaDon();
         GetFormChiTiet();
+        TruSoLuong();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblChiTietAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblChiTietAncestorAdded
@@ -578,14 +580,15 @@ void fillcombobox() {
         }
     }
 
-//    public void ThemChiTietHoaDon() {
-//        ChiTietHoaDon ct = GetFormChiTiet();
-//        try {
-//            ctdao.insert(ct);
-//            MsgBox.alert(this, "Thêm chi tiết thành công");
-//        } catch (Exception e) {
-//            MsgBox.alert(this, "Thêm chi tiết thất bại");
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public void TruSoLuong(){
+        MonAn ma = new MonAn();
+        int n = tblChiTiet.getRowCount();
+        for (int i = 0; i < n; i++) {
+            String maMA = tblChiTiet.getValueAt(i, 0).toString();
+            int soluong = Integer.parseInt(tblChiTiet.getValueAt(i, 3).toString());
+//            ma.setMaMA(tblChiTiet.getValueAt(i, 0).toString());
+//            ma.setSoLuong(Integer.parseInt(tblChiTiet.getValueAt(i, 3).toString()));
+            dao.tinhSoLuong(soluong, maMA);
+        }
+    }
 }

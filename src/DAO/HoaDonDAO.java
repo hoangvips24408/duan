@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import utils.JdbcHelper;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
 
 /**
  *
@@ -49,6 +51,24 @@ public class HoaDonDAO extends FastFood<HoaDon, Integer> {
         return list.get(0);
     }
 
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+        try {
+            List<Object[]> list = new ArrayList<>();
+            ResultSet rs = JdbcHelper.query(sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
+                for (int i = 0; i < cols.length; i++) {
+                    vals[i] = rs.getObject(cols[i]);
+                }
+                list.add(vals);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected List<HoaDon> selectBySql(String sql, Object... args) {
         List<HoaDon> list = new ArrayList<>();
@@ -87,13 +107,22 @@ public class HoaDonDAO extends FastFood<HoaDon, Integer> {
         }
         return list;
     }
-    
+
     public static void main(String[] args) {
         HoaDonDAO d = new HoaDonDAO();
-        List<HoaDon> list = d.selectBySql1();
-        for (HoaDon hoaDon : list) {
-            System.out.println(hoaDon.getMaHD());
+        d.tinhSoLuong(10, "ma01");
+    }
+    public void tinhSoLuong(int soLuong, String maMA) {
+        String sql = "{CALL sp_tinhSoLuong(?, ?)}";
+        try {
+            PreparedStatement st = new JdbcHelper().getStmt(sql);
+            st.setDouble(1, soLuong);
+            st.setString(2, maMA);
+            st.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
     }
 
 }
