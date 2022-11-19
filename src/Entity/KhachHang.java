@@ -82,5 +82,10 @@ public class KhachHang {
     public void setNgaySinh(String NgaySinh) {
         this.NgaySinh = NgaySinh;
     }
+
+    @Override
+    public String toString() {
+        return ""+getMaKH();
+    }
     
 }

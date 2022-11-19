@@ -80,4 +80,9 @@ public class KhuyenMai {
         this.hinh = hinh;
     }
 
+    @Override
+    public String toString() {
+        return ""+getMaKM();
+    }
+    
 }

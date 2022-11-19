@@ -34,6 +34,8 @@ import utils.MsgBox;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -45,7 +47,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
     String dburl = "jdbc:sqlserver://localhost:1433;databaseName=FastFood";
-     static String user = "sa";
+    static String user = "sa";
     static String pass = "2306";
     LoaiMonDAO daoloai = new LoaiMonDAO();
     KhachHangDAO khdao = new KhachHangDAO();
@@ -53,6 +55,8 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
     HoaDonDAO dao = new HoaDonDAO();
     ChiTietHoaDon ct = new ChiTietHoaDon();
     ChitietDAO ctdao = new ChitietDAO();
+    KhachHangDAO daokh = new KhachHangDAO();
+    KhuyenMaiDAO KMDAO = new KhuyenMaiDAO();
 
     public HoaDonJInternalFrame() {
         initComponents();
@@ -93,6 +97,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
         txtMaKH = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        cboGiamGia = new javax.swing.JComboBox<>();
 
         tblChiTiet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 51)));
         tblChiTiet.setModel(new javax.swing.table.DefaultTableModel(
@@ -265,6 +270,12 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        cboGiamGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboGiamGiaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -281,6 +292,12 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(35, 35, 35)
+                                .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel18)
                                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,12 +309,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
                                     .addComponent(txtGiamGia, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                                     .addComponent(txtThanhToan)
                                     .addComponent(txtMaKH)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(35, 35, 35)
-                                .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44)
-                                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cboGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(97, 97, 97))))
         );
         layout.setVerticalGroup(
@@ -308,28 +320,30 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
                             .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))
+                        .addGap(4, 4, 4)
+                        .addComponent(cboGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(txtGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1))))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
@@ -386,14 +400,13 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        
         try {
             Hashtable map = new Hashtable();
             JasperReport rpt = JasperCompileManager.compileReport("src\\UI\\HoaDon.jrxml");
             map.put("mahd", maHD);
             Connection conn = DriverManager.getConnection(dburl, user, pass);
-            JasperPrint p  = JasperFillManager.fillReport(rpt, map,conn);
-            JasperViewer.viewReport(p,false);
+            JasperPrint p = JasperFillManager.fillReport(rpt, map, conn);
+            JasperViewer.viewReport(p, false);
         } catch (JRException ex) {
             Logger.getLogger(HoaDonJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -401,11 +414,17 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void cboGiamGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGiamGiaActionPerformed
+        // TODO add your handling code here:
+        setgiamgia();
+    }//GEN-LAST:event_cboGiamGiaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JComboBox<String> cboGiamGia;
     private javax.swing.JComboBox<String> cboMaLoai;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel15;
@@ -474,9 +493,9 @@ void fillcombobox() {
         txtThanhToan.setText("" + thanhtien());
     }
 
-    KhuyenMaiDAO KMDAO = new KhuyenMaiDAO();
-
     public void giaKhuyenMai() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboGiamGia.getModel();
+        model.removeAllElements();
         List<KhuyenMai> list = KMDAO.selectAll();
         SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
         String ngayMay = format.format(new Date());
@@ -495,14 +514,39 @@ void fillcombobox() {
 
             if (now.getMonth().equals(startDate.getMonth())) {
                 if (now.getDayOfMonth() >= startDate.getDayOfMonth() && now.getDayOfMonth() <= endDate.getDayOfMonth()) {
-                    txtGiamGia.setText(km.getGiaKhuyenMai());
-                    giakhuyenMai = km.getGiaKhuyenMai();
-                    break;
-                } else {
-                    txtGiamGia.setText("Không có chương trình giảm giá nào đang diễn ra!");
+
+                    model.addElement(km);
                 }
+
             }
         }
+        LocalDateTime current = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formatted = current.format(formatter);
+        String[] ngaymay = formatted.split("-");
+        List<KhachHang> list1 = daokh.selectAll();
+        for (KhachHang khachHang : list1) {
+            String sinhnhat = khachHang.getNgaySinh();
+            String[] ngaysinhnhat = sinhnhat.split("-");
+            if (ngaymay[1].equals(ngaysinhnhat[1])) {
+                double ngaythuc = Double.parseDouble(ngaymay[2]);
+                double ngaysinh = Double.parseDouble(ngaysinhnhat[2]);
+                if ((ngaysinh - ngaythuc) == 1) {
+                    model.addElement(khachHang);
+                }
+
+            }
+        }
+    }
+
+    void setgiamgia() {
+        try {
+            KhuyenMai km = KMDAO.selectByID(cboGiamGia.getSelectedItem().toString());
+            txtGiamGia.setText(km.getGiaKhuyenMai());
+        } catch (Exception e) {
+            txtGiamGia.setText("30");
+        }
+
     }
 
     void HienThiLenBang() {
