@@ -7,6 +7,7 @@ package UI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+import utils.XImage;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Chao extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Init();
+         setIconImage(XImage.getAppIcon());
     }
 
     /**

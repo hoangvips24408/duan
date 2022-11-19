@@ -18,12 +18,24 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
 import utils.Auth;
 import utils.MsgBox;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -31,6 +43,9 @@ import utils.MsgBox;
  */
 public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
+    String dburl = "jdbc:sqlserver://localhost:1433;databaseName=FastFood";
+     static String user = "sa";
+    static String pass = "2306";
     LoaiMonDAO daoloai = new LoaiMonDAO();
     KhachHangDAO khdao = new KhachHangDAO();
     HoaDon hoadon = new HoaDon();
@@ -46,7 +61,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         fillcombobox();
         txtGiamGia.setEnabled(false);
         giaKhuyenMai();
-
+        HienThiLenBang();
     }
     int maHD;
 
@@ -76,6 +91,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         btnXoa = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         txtMaKH = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         tblChiTiet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 51)));
         tblChiTiet.setModel(new javax.swing.table.DefaultTableModel(
@@ -240,6 +256,13 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel18.setText("Mã KH:");
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -250,23 +273,29 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel15))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTongTien)
-                            .addComponent(txtGiamGia, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                            .addComponent(txtThanhToan)
-                            .addComponent(txtMaKH))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel15))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtTongTien)
+                                    .addComponent(txtGiamGia, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                                    .addComponent(txtThanhToan)
+                                    .addComponent(txtMaKH)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(35, 35, 35)
+                                .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(97, 97, 97))))
         );
         layout.setVerticalGroup(
@@ -294,10 +323,11 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(jLabel15)
                             .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -324,8 +354,8 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
-            ThemHoaDon();
-            GetFormChiTiet();
+        ThemHoaDon();
+        GetFormChiTiet();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblChiTietAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblChiTietAncestorAdded
@@ -350,12 +380,31 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblKhachHangMousePressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        
+        try {
+            Hashtable map = new Hashtable();
+            JasperReport rpt = JasperCompileManager.compileReport("src\\UI\\HoaDon.jrxml");
+            map.put("mahd", maHD);
+            Connection conn = DriverManager.getConnection(dburl, user, pass);
+            JasperPrint p  = JasperFillManager.fillReport(rpt, map,conn);
+            JasperViewer.viewReport(p,false);
+        } catch (JRException ex) {
+            Logger.getLogger(HoaDonJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(HoaDonJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboMaLoai;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -515,7 +564,7 @@ void fillcombobox() {
     public void GetFormChiTiet() {
         List<HoaDon> list = dao.selectBySql1();
         for (HoaDon hoaDon : list) {
-             maHD = hoaDon.getMaHD();
+            maHD = hoaDon.getMaHD();
         }
         ChiTietHoaDon ct = new ChiTietHoaDon();
         int n = tblChiTiet.getRowCount();

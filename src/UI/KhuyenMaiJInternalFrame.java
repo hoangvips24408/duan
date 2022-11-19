@@ -4,10 +4,26 @@
  */
 package UI;
 
+import DAO.KhachHangDAO;
 import DAO.KhuyenMaiDAO;
+import Entity.KhachHang;
 import Entity.KhuyenMai;
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -15,6 +31,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import utils.Auth;
 import utils.MsgBox;
+import utils.XDate;
 import utils.XImage;
 
 /**
@@ -26,7 +43,7 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
     KhuyenMaiDAO dao = new KhuyenMaiDAO();
     JFileChooser fileChooser = new JFileChooser();
     int row = -1;
-
+    KhachHangDAO daokh  = new KhachHangDAO();
     public KhuyenMaiJInternalFrame() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -347,6 +364,7 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
             try {
                 dao.insert(km);
                 this.fillToTable();
+                guiemailkh();
                 this.clear();
                 MsgBox.alert(this, "Thêm mới thành công!");
             } catch (Exception e) {
@@ -466,8 +484,60 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
-    
+    void guiemailkh(){
+        List<KhachHang> list = daokh.selectAll();
+        for (KhachHang khachHang : list) {
+            guiEmail(khachHang.getEmail());
+        }
+    }
+    void guiEmail(String email) {
+        File file1 = fileChooser.getSelectedFile();
+        String ngay = txtNgayBatDau.getText();
+        String[] ngaybd = ngay.split("-");
+        String a = txtNgayKetThuc.getText();
+        String[] ngaykt =a.split("-");
+        Properties p = new Properties();
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", 587);
+        String senderEmail = "";
+        String toEmail = email;
+        String subject = "Eatery xin chào quý khách";
+        String body = "Hiện nay cửa hàng đang có chưng trình khuyến mãi "+txtGiakhuyenMai.getText()+"% nhân dịp "+txtTenKhuyenMai.getText()+"\n"
+        +"Bắt đầu từ ngày "+ngaybd[2]+"-"+ngaybd[1]+"-"+ngaybd[0]+"kết thúc ngày "+ngaykt[2]+"-"+ngaykt[1]+"-"+ngaykt[0];
+        String pass1 = "";
+        Session s = Session.getInstance(p, new javax.mail.Authenticator() {
+            @Override
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new javax.mail.PasswordAuthentication(senderEmail, pass1);
+            }
+        });
+
+        try {
+            Message msg = new MimeMessage(s);
+            msg.setFrom(new InternetAddress(senderEmail));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            msg.setSubject(subject);
+            msg.setText(body);
+            MimeBodyPart mbp = new MimeBodyPart();
+            mbp.setContent(body, "text/html; charset=utf-8");
+            MimeBodyPart filepart = new MimeBodyPart();
+            File file = new File("staff\\"+file1.getName());
+            FileDataSource fds = new FileDataSource(file);
+            filepart.setDataHandler(new DataHandler(fds));
+            filepart.setFileName(file.getName());
+            MimeMultipart multipart = new MimeMultipart();
+            multipart.addBodyPart(mbp);
+            multipart.addBodyPart(filepart);
+            msg.setContent(multipart);
+            Transport.send(msg);
+        } catch (MessagingException ex) {
+            Logger.getLogger(NhanVienJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
