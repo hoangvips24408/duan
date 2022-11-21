@@ -16,6 +16,8 @@ import java.sql.ResultSet;
  */
 public class KhuyenMaiDAO {
 
+    
+    
     final String GET_ALL = "select * from KhuyenMai";
     String INSERT_SQL = "insert into KhuyenMai values (?, ?, ?, ?, ?, ?)";
     String UPDATE_SQL = "update KhuyenMai set TenKM = ?, NgayBatDau = ?, NgayKetThuc = ?, Hinh = ?, GiaKhuyenMai = ? where MaKM = ?";
