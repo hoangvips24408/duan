@@ -372,7 +372,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ThemHoaDon();
         GetFormChiTiet();
-        TruSoLuong();
+//        TruSoLuong();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblChiTietAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblChiTietAncestorAdded
@@ -501,7 +501,7 @@ void fillcombobox() {
         String ngayMay = format.format(new Date());
         String[] ngayHienTai = ngayMay.split("-");
         String giakhuyenMai = "";
-
+        int b =1;
         for (KhuyenMai km : list) {
             String KT = km.getNgayKT();
             String[] viTriKT = KT.split("-");
@@ -514,11 +514,14 @@ void fillcombobox() {
 
             if (now.getMonth().equals(startDate.getMonth())) {
                 if (now.getDayOfMonth() >= startDate.getDayOfMonth() && now.getDayOfMonth() <= endDate.getDayOfMonth()) {
-
                     model.addElement(km);
+                    b=2;
                 }
 
             }
+        }
+        if (b==1) {
+            txtGiamGia.setText("0");
         }
         LocalDateTime current = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -539,7 +542,7 @@ void fillcombobox() {
         }
     }
 
-    void setgiamgia() {
+    void setgiamgia() { 
         try {
             KhuyenMai km = KMDAO.selectByID(cboGiamGia.getSelectedItem().toString());
             txtGiamGia.setText(km.getGiaKhuyenMai());
@@ -591,9 +594,11 @@ void fillcombobox() {
     public HoaDon GetFormHoaDon() {
         HoaDon hoadon = new HoaDon();
         hoadon.setNgayXuat(String.valueOf(java.time.LocalDate.now()));
-        hoadon.setTongTien(Float.parseFloat(txtThanhToan.getText()));
+        hoadon.setTongTien(Float.parseFloat(txtTongTien.getText()));
         hoadon.setMaNV(Auth.user.getMaNV());
         hoadon.setMaKH(txtMaKH.getText());
+        hoadon.setGiamGia(Integer.valueOf(txtGiamGia.getText()));
+        hoadon.setThanhToan(Float.parseFloat(txtThanhToan.getText()));
         return hoadon;
     }
 

@@ -471,11 +471,12 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
     }
     void intsert() {
         NhanVien nv = getFrom();
-//        try {
+        try {
             dao.insert(nv);
             filltable();
-//        } catch (Exception e) {
-//        }
+            MsgBox.alert(this, "Thêm thành công");
+        } catch (Exception e) {
+        }
 
     }
     String duongdan;

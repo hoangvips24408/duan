@@ -11,17 +11,38 @@ public class HoaDon {
     float TongTien;
     String MaNV;
     String MaKH;
-
+    int GiamGia;
+    float ThanhToan;
     public HoaDon() {
     }
 
-    public HoaDon(int MaHD, String NgayXuat, float TongTien, String MaNV, String MaKH) {
+    public HoaDon(int MaHD, String NgayXuat, float TongTien, String MaNV, String MaKH, int GiamGia, float ThanhToan) {
         this.MaHD = MaHD;
         this.NgayXuat = NgayXuat;
         this.TongTien = TongTien;
         this.MaNV = MaNV;
         this.MaKH = MaKH;
+        this.GiamGia = GiamGia;
+        this.ThanhToan = ThanhToan;
     }
+
+    public int getGiamGia() {
+        return GiamGia;
+    }
+
+    public void setGiamGia(int GiamGia) {
+        this.GiamGia = GiamGia;
+    }
+
+    public float getThanhToan() {
+        return ThanhToan;
+    }
+
+    public void setThanhToan(float ThanhToan) {
+        this.ThanhToan = ThanhToan;
+    }
+
+  
 
     public int getMaHD() {
         return MaHD;

@@ -15,20 +15,20 @@ import java.sql.Connection;
  */
 public class HoaDonDAO extends FastFood<HoaDon, Integer> {
 
-    String insert_sql = "INSERT INTO HoaDon (NgayXuat, TongTien, MaNV, MaKH) VALUES (?,?,?,?)";
-    String update_sql = "UPDATE HoaDon SET NgayXuat =?, TongTien =?, MaNV =?, MaKH =? where MaHD = ?";
+    String insert_sql = "INSERT INTO HoaDon (NgayXuat, MaNV, MaKH, TongTien, GiamGia,ThanhToan) VALUES (?,?,?,?,?,?)";
+    String update_sql = "UPDATE HoaDon SET NgayXuat =?, MaNV =?, MaKH =?, TongTien =?,GiamGia=?,ThanhToan=? where MaHD = ?";
     String delete_sql = "DELETE FROM HoaDon where MaHD=?";
     String select_all = "SELECT * FROM HoaDon";
     String select_byID = "SELECT * FROM HoaDon where MaHD=?";
 
     @Override
     public void insert(HoaDon entity) {
-        JdbcHelper.update(insert_sql, entity.getNgayXuat(), entity.getTongTien(), entity.getMaNV(), entity.getMaKH());
+        JdbcHelper.update(insert_sql, entity.getNgayXuat(), entity.getMaNV(), entity.getMaKH(), entity.getTongTien(),entity.getGiamGia(),entity.getThanhToan());
     }
 
     @Override
     public void update(HoaDon entity) {
-        JdbcHelper.update(update_sql, entity.getNgayXuat(), entity.getTongTien(), entity.getMaNV(), entity.getMaKH(), entity.getMaHD());
+        JdbcHelper.update(update_sql, entity.getNgayXuat(), entity.getMaNV(), entity.getMaKH(), entity.getTongTien(),entity.getGiamGia(),entity.getThanhToan(), entity.getMaHD());
 
     }
 
@@ -81,6 +81,8 @@ public class HoaDonDAO extends FastFood<HoaDon, Integer> {
                 entity.setMaNV(rs.getString("MaNV"));
                 entity.setNgayXuat(rs.getString("NgayXuat"));
                 entity.setTongTien(rs.getFloat("TongTien"));
+                entity.setGiamGia(rs.getInt("GiamGia"));
+                entity.setThanhToan(rs.getFloat("ThanhToan"));
                 list.add(entity);
             }
         } catch (Exception e) {
