@@ -146,7 +146,15 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
             new String [] {
                 "Mã món", "Tên món", "Đơn vị tính", "Giá bán"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblTatCa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblTatCaMousePressed(evt);
@@ -467,10 +475,28 @@ void fillcombobox() {
     }
 
     void filltablehoadon() {
+        int dem=0;
         int row = tblTatCa.getSelectedRow();
+        int n = tblChiTiet.getRowCount();
+        String ma1 = (String) tblTatCa.getValueAt(row, 0);
         DefaultTableModel model = (DefaultTableModel) tblChiTiet.getModel();
         Object[] chonmon = new Object[]{tblTatCa.getValueAt(row, 0), tblTatCa.getValueAt(row, 1), tblTatCa.getValueAt(row, 3), 1, tblTatCa.getValueAt(row, 3)};
-        model.addRow(chonmon);
+        if (tblChiTiet.getRowCount() == 0) {
+            model.addRow(chonmon);
+        } else {
+            for (int i = 0; i < n; i++) {
+                if (ma1.equals(tblChiTiet.getValueAt(i, 0))) {
+                    int soluong = (int) tblChiTiet.getValueAt(i, 3);
+                    model.setValueAt(soluong + 1, i, 3);
+                    dem=1;
+                    break;
+                }    
+            }
+            if (dem==0) {
+                 model.addRow(chonmon);
+            }
+        }
+
     }
 
     void xoamon() {
@@ -501,7 +527,7 @@ void fillcombobox() {
         String ngayMay = format.format(new Date());
         String[] ngayHienTai = ngayMay.split("-");
         String giakhuyenMai = "";
-        int b =1;
+        int b = 1;
         for (KhuyenMai km : list) {
             String KT = km.getNgayKT();
             String[] viTriKT = KT.split("-");
@@ -515,12 +541,12 @@ void fillcombobox() {
             if (now.getMonth().equals(startDate.getMonth())) {
                 if (now.getDayOfMonth() >= startDate.getDayOfMonth() && now.getDayOfMonth() <= endDate.getDayOfMonth()) {
                     model.addElement(km);
-                    b=2;
+                    b = 2;
                 }
 
             }
         }
-        if (b==1) {
+        if (b == 1) {
             txtGiamGia.setText("0");
         }
         LocalDateTime current = LocalDateTime.now();
@@ -542,7 +568,7 @@ void fillcombobox() {
         }
     }
 
-    void setgiamgia() { 
+    void setgiamgia() {
         try {
             KhuyenMai km = KMDAO.selectByID(cboGiamGia.getSelectedItem().toString());
             txtGiamGia.setText(km.getGiaKhuyenMai());
@@ -629,7 +655,7 @@ void fillcombobox() {
         }
     }
 
-    public void TruSoLuong(){
+    public void TruSoLuong() {
         MonAn ma = new MonAn();
         int n = tblChiTiet.getRowCount();
         for (int i = 0; i < n; i++) {
