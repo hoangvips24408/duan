@@ -7,7 +7,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[  SELECT HoaDon.MaHD, KhachHang.HoTen, HoaDon.TongTien, HoaDon.GiamGia, HoaDon.NgayXuat, HoaDon.ThanhToan, ChiTietHoaDon.SoLuong, ChiTietHoaDon.ThanhTien, MonAn.TenMon, NhanVien.TenNV,MonAn.GiaTien
+		<![CDATA[SELECT HoaDon.MaHD, KhachHang.HoTen, HoaDon.TongTien, HoaDon.GiamGia, HoaDon.NgayXuat, HoaDon.ThanhToan, ChiTietHoaDon.SoLuong, ChiTietHoaDon.ThanhTien, MonAn.TenMon, NhanVien.TenNV,MonAn.GiaTien
 FROM     ChiTietHoaDon INNER JOIN
                   HoaDon ON ChiTietHoaDon.MaHD = HoaDon.MaHD INNER JOIN
                   KhachHang ON HoaDon.MaKH = KhachHang.MaKH INNER JOIN
@@ -40,7 +40,7 @@ where HoaDon.MaHD=$P{mahd}]]>
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="53" height="38" uuid="2e37fad6-7f7d-401f-a15f-260fd160381d"/>
-				<imageExpression><![CDATA["D:\\TÀI LIEU HOC\\TÀI LIEU HOC\\duan1\\Eatery (1)\\FastFood\\staff\\logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["H:\\Hoctap\\DuAn1\\duan\\staff\\logo.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="211" y="56" width="112" height="20" uuid="274fa75b-f5a2-472e-a104-314cdcf23cba"/>
