@@ -11,7 +11,7 @@ import java.sql.ResultSet;
  * @author Admin
  */
 public class ThongKeDAO {
-    
+
     String insert_sql = "INSERT INTO NhanVien (MaNV, TenNV, NgaySinh, GioiTinh, DiaChi, SDT, ChucVu, Hinh, MatKhau) VALUES (?,?,?,?,?,?,?,?,?)";
     String update_sql = "UPDATE NhanVien TenNV =?, NgaySinh =?, GioiTinh =?, DiaChi =?, SDT =?, ChucVu =?, Hinh =?, MatKhau =? where MaNV = ?";
     String delete_sql = "DELETE FROM NhanVien where MaNV=?";
@@ -23,11 +23,11 @@ public class ThongKeDAO {
     }
 
     public void update(NhanVien entity) {
-         JdbcHelper.update(update_sql, entity.getTenNV(), entity.getNgaySinh(), entity.isGioiTinh(), entity.getDiaChi(), entity.isChucVu(), entity.getHinh(), entity.getMatKhau(), entity.getMaNV());
+        JdbcHelper.update(update_sql, entity.getTenNV(), entity.getNgaySinh(), entity.isGioiTinh(), entity.getDiaChi(), entity.isChucVu(), entity.getHinh(), entity.getMatKhau(), entity.getMaNV());
     }
 
     public void delete(String id) {
-         JdbcHelper.update(id);
+        JdbcHelper.update(id);
     }
 
     public List<NhanVien> selectAll() {
@@ -45,7 +45,7 @@ public class ThongKeDAO {
     protected List<NhanVien> selectBySql(String sql, Object... args) {
         List<NhanVien> list = new ArrayList<NhanVien>();
         try {
-            ResultSet rs =  JdbcHelper.query(sql, args);
+            ResultSet rs = JdbcHelper.query(sql, args);
             while (rs.next()) {
                 NhanVien entity = new NhanVien();
                 entity.setChucVu(rs.getBoolean("ChucVu"));
@@ -65,11 +65,17 @@ public class ThongKeDAO {
         return list;
     }
 
-    public List<NhanVien> selectTenNVByThang(int thang) {
-        String sql = "select *\n"
-                + "from NhanVien nv, HoaDon hd\n"
-                + "where nv.MaNV = hd.MaNV and month(hd.NgayXuat) = ?";
-        return this.selectBySql(sql, thang);
+//    public List<NhanVien> selectTenNVByThang() {
+//        String sql = "select distinct nv.TenNV\n"
+//                + "from HoaDon hd, NhanVien nv\n"
+//                + "where hd.MaNV = nv.MaNV";
+//        return this.selectBySql(sql);
+//    }
+//    
+    public List<Object[]> selectTenNVByThang() {
+        String sql = "{CALL gettennhanvien()}";
+        String[] cols = {"TenNV"};
+        return getListOfArray(sql, cols);
     }
 
     private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
@@ -89,16 +95,26 @@ public class ThongKeDAO {
             throw new RuntimeException(e);
         }
     }
-    public List<Object[]> getTableTheoTen(String tenNhanVien, int thang) {
-        String sql = "{CALL doanhthutheothangmoi(?, ?)}";
-        String[] cols = {"MaHD", "TenMon", "SoLuong", "Tổng tiền", "NgayXuat"};
-        return getListOfArray(sql, cols, tenNhanVien, thang);
+
+    public List<Object[]> getTableTheoTen(String tenNhanVien) {
+        String sql = "{CALL doanhthutheothangmoi2(?)}";
+        String[] cols = {"MaHD", "TongTien", "GiamGia", "ThanhToan", "NgayXuat"};
+        return getListOfArray(sql, cols, tenNhanVien);
     }
-    
+
     public List<Object[]> getTableTheoThoiGian(int thang) {
         String sql = "{CALL doanhthutheothoigian(?)}";
         String[] cols = {"MaHD", "Tổng tiền", "NgayXuat"};
         return getListOfArray(sql, cols, thang);
+    }
+
+    public static void main(String[] args) {
+        ThongKeDAO d = new ThongKeDAO();
+        List<Object[]> a = d.getTableTheoTen("Obama");
+        for (Object[] objects : a) {
+            System.out.println(objects.toString());
+
+        }
     }
 
 }

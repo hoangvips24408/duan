@@ -20,18 +20,22 @@ import javax.swing.table.DefaultTableModel;
  * @author Quan
  */
 public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
+
     LoaiMonDAO loaiDao = new LoaiMonDAO();
     MonAnDAO monanDao = new MonAnDAO();
     ThongKeDAO nhanvienDao = new ThongKeDAO();
+
     /**
      * Creates new form DoanhThuJInternalFrame
      */
     public DoanhThuJInternalFrame() {
         initComponents();
-        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         FillComboBoxMaLoaiMon();
+        fillComboBoxTenNV();
+        fillTableTheoNhanVien();
     }
 
     @SuppressWarnings("unchecked")
@@ -63,7 +67,6 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         lblNhanVien1 = new javax.swing.JLabel();
         lblNhanVien2 = new javax.swing.JLabel();
-        cboThang = new javax.swing.JComboBox<>();
         cboTenNV = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -202,7 +205,7 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã Hóa Đơn", "Tên Món", "Số Lượng", "Tổng Tiền", "Ngày Bán"
+                "Mã Hóa Đơn", "Tổng Tiền", "Giảm Giá", "Thanh Toán", "Ngày Bán"
             }
         ));
         jScrollPane3.setViewportView(tblDoanhThuMonAn1);
@@ -216,18 +219,6 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
         lblNhanVien1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Staff-icon.png"))); // NOI18N
 
         lblNhanVien2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Staff-icon.png"))); // NOI18N
-
-        cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        cboThang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboThangMouseClicked(evt);
-            }
-        });
-        cboThang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboThangActionPerformed(evt);
-            }
-        });
 
         cboTenNV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -260,9 +251,7 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
                                 .addComponent(txtTongTienHoaDon1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cboThang, 0, 175, Short.MAX_VALUE)
-                            .addComponent(cboTenNV, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(cboTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -286,9 +275,7 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblChonTenNhanVien)
-                        .addGap(29, 29, 29)
-                        .addComponent(cboThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(80, 80, 80)
                         .addComponent(cboTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(103, 103, 103)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -299,7 +286,7 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6)
                             .addComponent(txtTongTienHoaDon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
 
         tabs.addTab("NHÂN VIÊN", jPanel3);
@@ -455,16 +442,6 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
         txtTongSoHD.setText("" + TongSoHoaDon());
     }//GEN-LAST:event_cboTenMonActionPerformed
 
-    private void cboThangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboThangMouseClicked
-        // TODO add your handling code here:
-        fillComboBoxTenNV();
-    }//GEN-LAST:event_cboThangMouseClicked
-
-    private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
-        // TODO add your handling code here:
-        fillComboBoxTenNV();
-    }//GEN-LAST:event_cboThangActionPerformed
-
     private void cboTenNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboTenNVMouseClicked
         // TODO add your handling code here:
         fillTableTheoNhanVien();
@@ -474,7 +451,7 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
 
     private void cboTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenNVActionPerformed
         // TODO add your handling code here:
-        fillTableTheoNhanVien();
+       fillTableTheoNhanVien();
         txtTongSoHD1.setText("" + TongSoHoaDon1());
         txtTongTienHoaDon1.setText("" + TongTienHoaDon1());
     }//GEN-LAST:event_cboTenNVActionPerformed
@@ -491,7 +468,6 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cboLoaiMonAn;
     private javax.swing.JComboBox<String> cboTenMon;
     private javax.swing.JComboBox<String> cboTenNV;
-    private javax.swing.JComboBox<String> cboThang;
     private javax.swing.JComboBox<String> cboThangXem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -579,25 +555,26 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
     void fillComboBoxTenNV() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTenNV.getModel();
         model.removeAllElements();
-        int thang = cboThang.getSelectedIndex() + 1;
-        List<NhanVien> list = nhanvienDao.selectTenNVByThang(thang);
-        for (NhanVien nv : list) {
-            model.addElement(nv);
+        //       int thang = cboThang.getSelectedIndex() + 1;
+        List<Object[]> list = nhanvienDao.selectTenNVByThang();
+        for (Object[] objects : list) {
+            model.addElement(objects[0].toString());
         }
     }
-    
+
     public void fillTableTheoNhanVien() {
         DefaultTableModel model = (DefaultTableModel) tblDoanhThuMonAn1.getModel();
         model.setRowCount(0);
-        int thang = cboThang.getSelectedIndex() + 1;
-        NhanVien nv = (NhanVien) cboTenNV.getSelectedItem();
-        List<Object[]> list = nhanvienDao.getTableTheoTen(nv.getTenNV(), thang);
+        //       int thang = cboThang.getSelectedIndex() + 1;
+      //  NhanVien nv = (NhanVien) cboTenNV.getSelectedItem();
+        String tnv = String.valueOf(cboTenNV.getSelectedItem());
+        List<Object[]> list = nhanvienDao.getTableTheoTen(tnv);
         for (Object[] row : list) {
             model.addRow(row);
         }
     }
-    
-     public int TongSoHoaDon1() {
+
+    public int TongSoHoaDon1() {
         int sum = tblDoanhThuMonAn1.getRowCount();
         return sum;
     }
@@ -611,7 +588,7 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
         }
         return tong;
     }
-    
+
     public void fillTableTheoThang() {
         DefaultTableModel model = (DefaultTableModel) tblThang.getModel();
         model.setRowCount(0);
@@ -621,8 +598,8 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
             model.addRow(row);
         }
     }
-    
-     public int TongSoHoaDon2() {
+
+    public int TongSoHoaDon2() {
         int sum = tblThang.getRowCount();
         return sum;
     }

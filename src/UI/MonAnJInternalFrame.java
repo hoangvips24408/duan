@@ -327,12 +327,12 @@ public class MonAnJInternalFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblMonAnMouseClicked
 
     private void cboMaLoaiMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMaLoaiMonActionPerformed
-       // txtTenLoai.setText(GetTenLoai());        // TODO add your handling code here:
+        // txtTenLoai.setText(GetTenLoai());        // TODO add your handling code here:
     }//GEN-LAST:event_cboMaLoaiMonActionPerformed
 
     private void cboMaLoaiMonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboMaLoaiMonMouseClicked
         // TODO add your handling code here:
-       // txtTenLoai.setText(GetTenLoai());
+        // txtTenLoai.setText(GetTenLoai());
     }//GEN-LAST:event_cboMaLoaiMonMouseClicked
 
 
@@ -427,8 +427,6 @@ public class MonAnJInternalFrame extends javax.swing.JInternalFrame {
             return "Món nhẹ";
         }
     }
-    
-    
 
     void GetHinhAnh() {
         int width = lbeHinh.getWidth();
@@ -442,6 +440,7 @@ public class MonAnJInternalFrame extends javax.swing.JInternalFrame {
     }
 
     public void CapNhat() {
+        GetHinhAnh();
         MonAn monAn = GetForm();
         try {
             maDAO.update(monAn);
@@ -513,6 +512,5 @@ public class MonAnJInternalFrame extends javax.swing.JInternalFrame {
         this.LamMoiForm();
         this.row = -1;
     }
-    
-    
+
 }
