@@ -451,7 +451,7 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
 
     private void cboTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenNVActionPerformed
         // TODO add your handling code here:
-       fillTableTheoNhanVien();
+        fillTableTheoNhanVien();
         txtTongSoHD1.setText("" + TongSoHoaDon1());
         txtTongTienHoaDon1.setText("" + TongTienHoaDon1());
     }//GEN-LAST:event_cboTenNVActionPerformed
@@ -557,21 +557,42 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
         model.removeAllElements();
         //       int thang = cboThang.getSelectedIndex() + 1;
         List<Object[]> list = nhanvienDao.selectTenNVByThang();
+        model.addElement("ALL");
         for (Object[] objects : list) {
             model.addElement(objects[0].toString());
         }
     }
 
+//    public void fillTableTheoNhanVien() {
+//        DefaultTableModel model = (DefaultTableModel) tblDoanhThuMonAn1.getModel();
+//        model.setRowCount(0);
+//        //       int thang = cboThang.getSelectedIndex() + 1;
+//      //  NhanVien nv = (NhanVien) cboTenNV.getSelectedItem();
+//        String tnv = String.valueOf(cboTenNV.getSelectedItem());
+//        if(tnv.equals("All")){
+//            
+//        }
+//        List<Object[]> list = nhanvienDao.getTableTheoTen(tnv);
+//        for (Object[] row : list) {
+//            model.addRow(row);
+//        }
+//    }
     public void fillTableTheoNhanVien() {
         DefaultTableModel model = (DefaultTableModel) tblDoanhThuMonAn1.getModel();
         model.setRowCount(0);
-        //       int thang = cboThang.getSelectedIndex() + 1;
-      //  NhanVien nv = (NhanVien) cboTenNV.getSelectedItem();
         String tnv = String.valueOf(cboTenNV.getSelectedItem());
-        List<Object[]> list = nhanvienDao.getTableTheoTen(tnv);
-        for (Object[] row : list) {
-            model.addRow(row);
+        if (tnv.equals("ALL")) {
+            List<Object[]> list = nhanvienDao.getAllHoaDon();
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
+        } else {
+            List<Object[]> list = nhanvienDao.getTableTheoTen(tnv);
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
         }
+
     }
 
     public int TongSoHoaDon1() {

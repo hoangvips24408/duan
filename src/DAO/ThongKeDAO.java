@@ -116,5 +116,12 @@ public class ThongKeDAO {
 
         }
     }
+    
+    public List<Object[]> getAllHoaDon() {
+        String sql = "{CALL getAllHoaDon()}";
+        String[] cols = {"MaHD", "TongTien", "GiamGia", "ThanhToan", "NgayXuat" };
+        return getListOfArray(sql, cols);
+    }
+
 
 }
