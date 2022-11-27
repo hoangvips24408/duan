@@ -7,7 +7,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT HoaDon.MaHD, KhachHang.HoTen, HoaDon.TongTien, HoaDon.GiamGia, HoaDon.NgayXuat, HoaDon.ThanhToan, ChiTietHoaDon.SoLuong, ChiTietHoaDon.ThanhTien, MonAn.TenMon, NhanVien.TenNV,MonAn.GiaTien
+		<![CDATA[SELECT HoaDon.MaHD, KhachHang.HoTen, HoaDon.TongTien, HoaDon.GiamGia, CONCAT( DAY(HoaDon.NgayXuat),'-',MONTH(HoaDon.NgayXuat),'-',YEAR(HoaDon.NgayXuat)) as 'NgayXuat', HoaDon.ThanhToan, ChiTietHoaDon.SoLuong, ChiTietHoaDon.ThanhTien, MonAn.TenMon, NhanVien.TenNV,MonAn.GiaTien
 FROM     ChiTietHoaDon INNER JOIN
                   HoaDon ON ChiTietHoaDon.MaHD = HoaDon.MaHD INNER JOIN
                   KhachHang ON HoaDon.MaKH = KhachHang.MaKH INNER JOIN
@@ -19,7 +19,7 @@ where HoaDon.MaHD=$P{mahd}]]>
 	<field name="HoTen" class="java.lang.String"/>
 	<field name="TongTien" class="java.lang.Double"/>
 	<field name="GiamGia" class="java.lang.Integer"/>
-	<field name="NgayXuat" class="java.sql.Date"/>
+	<field name="NgayXuat" class="java.lang.String"/>
 	<field name="ThanhToan" class="java.lang.Double"/>
 	<field name="SoLuong" class="java.lang.Integer"/>
 	<field name="ThanhTien" class="java.lang.Double"/>
@@ -38,10 +38,6 @@ where HoaDon.MaHD=$P{mahd}]]>
 				</textElement>
 				<text><![CDATA[HÓA ĐƠN]]></text>
 			</staticText>
-			<image>
-				<reportElement x="0" y="0" width="53" height="38" uuid="2e37fad6-7f7d-401f-a15f-260fd160381d"/>
-				<imageExpression><![CDATA["H:\\Hoctap\\DuAn1\\duan\\staff\\logo.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="211" y="56" width="112" height="20" uuid="274fa75b-f5a2-472e-a104-314cdcf23cba"/>
 				<textElement>
@@ -56,6 +52,10 @@ where HoaDon.MaHD=$P{mahd}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{MaHD}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="11" y="6" width="53" height="50" uuid="9581b00a-f2fb-4c0e-a829-78542340c970"/>
+				<imageExpression><![CDATA["D:\\TÀI LIEU HOC\\TÀI LIEU HOC\\duan1\\Eatery (1)\\FastFood\\staff\\logo.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -77,12 +77,12 @@ where HoaDon.MaHD=$P{mahd}]]>
 				<textFieldExpression><![CDATA[$F{TenNV}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="142" y="31" width="100" height="20" uuid="c4871388-a7ee-4bcc-9c99-985b50670e0c"/>
-				<textFieldExpression><![CDATA[$F{NgayXuat}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="407" y="0" width="100" height="20" uuid="c506748b-6eda-42a9-b8ba-16a2acb6f474"/>
 				<textFieldExpression><![CDATA[$F{HoTen}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="142" y="31" width="100" height="20" uuid="5622519f-7457-4f06-b266-3d7805710d32"/>
+				<textFieldExpression><![CDATA[$F{NgayXuat}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

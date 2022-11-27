@@ -4,14 +4,20 @@
  */
 package UI;
 
+import DAO.ChitietDAO;
+import DAO.ThongKeDAO;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Quan
  */
 public class ChiTietHoaDonJInternalFrame extends javax.swing.JInternalFrame {
-
+    ThongKeDAO daotk = new ThongKeDAO();
+    ChitietDAO daoct = new ChitietDAO();
     /**
      * Creates new form ChiTietHoaDonJInternalFrame
      */
@@ -20,6 +26,8 @@ public class ChiTietHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+        fillcombobotennv();
+        filltablehoadon();
     }
 
     @SuppressWarnings("unchecked")
@@ -63,6 +71,11 @@ public class ChiTietHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                 "Mã hóa đơn", "Nhân viên", "Ngày xuất  HD", "Tổng tiền"
             }
         ));
+        tblLichSuHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblLichSuHoaDonMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblLichSuHoaDon);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 25)); // NOI18N
@@ -71,7 +84,19 @@ public class ChiTietHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 25)); // NOI18N
         jLabel1.setText("Lịch sử hóa đơn");
 
+        cboThoiGian.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        cboThoiGian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboThoiGianActionPerformed(evt);
+            }
+        });
+
         cboNhanVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cboNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNhanVienActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Thời gian");
 
@@ -133,6 +158,25 @@ public class ChiTietHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cboThoiGianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThoiGianActionPerformed
+        // TODO add your handling code here:
+        fillcombobotennv();
+        DefaultTableModel model = (DefaultTableModel) tblChiTietHD.getModel();
+        model.setRowCount(0);
+    }//GEN-LAST:event_cboThoiGianActionPerformed
+
+    private void cboNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNhanVienActionPerformed
+        // TODO add your handling code here:
+        filltableHoaDonNV();
+        DefaultTableModel model = (DefaultTableModel) tblChiTietHD.getModel();
+        model.setRowCount(0);
+    }//GEN-LAST:event_cboNhanVienActionPerformed
+
+    private void tblLichSuHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLichSuHoaDonMouseClicked
+        // TODO add your handling code here:
+        filltablechitiet();
+    }//GEN-LAST:event_tblLichSuHoaDonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboNhanVien;
@@ -146,4 +190,65 @@ public class ChiTietHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblChiTietHD;
     private javax.swing.JTable tblLichSuHoaDon;
     // End of variables declaration//GEN-END:variables
+    void fillcombobotennv(){
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboNhanVien.getModel();
+        model.removeAllElements();
+        String thang = String.valueOf(cboThoiGian.getSelectedItem());
+        if (thang.equals("ALL")) {
+            List<Object[]> list1 = daotk.selectTenNVByThang();
+            for (Object[] objects : list1) {
+                model.addElement(objects[0].toString());
+            }
+        }else{
+            
+            List<Object[]> list = daoct.selectTenNV(Integer.parseInt(thang));
+            for (Object[] objects : list) {
+                model.addElement(objects[0].toString());
+            }
+        }
+        filltablehoadon();
+    }
+    void filltablehoadon(){
+        DefaultTableModel model = (DefaultTableModel) tblLichSuHoaDon.getModel();
+        model.setRowCount(0);
+        String thang = String.valueOf(cboThoiGian.getSelectedItem());
+        if (thang.equals("ALL")) {
+            List<Object[]> list = daoct.selectallhoadon();
+            for (Object[] objects : list) {
+                model.addRow(objects);
+            }
+        }else{
+            List<Object[]> list1 = daoct.selectallhoadontheothang(Integer.parseInt(thang));
+            for (Object[] objects : list1) {
+                model.addRow(objects);
+            }
+        }
+    }
+    void filltableHoaDonNV(){
+        DefaultTableModel model = (DefaultTableModel) tblLichSuHoaDon.getModel();
+        model.setRowCount(0);
+        String thang = String.valueOf(cboThoiGian.getSelectedItem());
+        String nv = String.valueOf(cboNhanVien.getSelectedItem());
+        if (thang.equals("ALL")) {
+            List<Object[]> list = daoct.selectallhoadontheotennv(nv);
+            for (Object[] objects : list) {
+                model.addRow(objects);
+            }
+        } else{
+            List<Object[]> list1= daoct.selecttablehd(nv, Integer.parseInt(thang));
+            for (Object[] objects : list1) {
+                model.addRow(objects);
+            }
+        }
+    }
+    void filltablechitiet(){
+        int row = tblLichSuHoaDon.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tblChiTietHD.getModel();
+        model.setRowCount(0);
+        int mand = (int) tblLichSuHoaDon.getValueAt(row, 0);
+        List<Object[]> list = daoct.selectablechitiet(mand);
+        for (Object[] objects : list) {
+            model.addRow(objects);
+        }
+    }
 }

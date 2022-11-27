@@ -142,26 +142,31 @@ public class qrcode extends javax.swing.JFrame implements Runnable, ThreadFactor
                     continue;
                 }
             }
-            LuminanceSource source = new BufferedImageLuminanceSource(img);
-            BinaryBitmap bit = new BinaryBitmap(new HybridBinarizer(source));
             try {
-                result = new MultiFormatReader().decode(bit);
-            } catch (Exception e) {
-            }
-            if (result != null) {
-//                jTextField1.setText(result.getText());
-                NhanVien nhanvien = dao.selectById(result.getText());
-                if (nhanvien == null) {
-                    MsgBox.alert(this, "Sai mã");
-                } else {
-                    Auth.user = nhanvien;
-                    TrangChuJFrame tc = new TrangChuJFrame();
-                    tc.setVisible(true);
-                    webcam.close();
-                    this.setVisible(false);
+                LuminanceSource source = new BufferedImageLuminanceSource(img);
+                BinaryBitmap bit = new BinaryBitmap(new HybridBinarizer(source));
+                try {
+                    result = new MultiFormatReader().decode(bit);
+                } catch (Exception e) {
                 }
+                if (result != null) {
+//                jTextField1.setText(result.getText());
+                    NhanVien nhanvien = dao.selectById(result.getText());
+                    if (nhanvien == null) {
+                        MsgBox.alert(this, "Sai mã");
+                    } else {
+                        Auth.user = nhanvien;
+                        TrangChuJFrame tc = new TrangChuJFrame();
+                        tc.setVisible(true);
+                        webcam.close();
+                        this.setVisible(false);
+                    }
+
+                }
+            } catch (Exception e) {
 
             }
+
         } while (true);
     }
 

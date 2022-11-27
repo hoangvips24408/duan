@@ -110,9 +110,9 @@ public class ThongKeDAO {
 
     public static void main(String[] args) {
         ThongKeDAO d = new ThongKeDAO();
-        List<Object[]> a = d.getTableTheoTen("Obama");
+        List<Object[]> a = d.selectTenNVByThang();
         for (Object[] objects : a) {
-            System.out.println(objects.toString());
+            System.out.println(objects[0].toString());
 
         }
     }
