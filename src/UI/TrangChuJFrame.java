@@ -75,7 +75,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         btnHoaDon = new javax.swing.JButton();
         btnNhanVien = new javax.swing.JButton();
         btnKhachHang = new javax.swing.JButton();
-        btnTaiKhoan = new javax.swing.JButton();
+        btnDoiMatKhau = new javax.swing.JButton();
         btnTaiKhoan1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -233,16 +233,16 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             }
         });
 
-        btnTaiKhoan.setBackground(new java.awt.Color(240, 151, 57));
-        btnTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
-        btnTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Acount.png"))); // NOI18N
-        btnTaiKhoan.setText("ĐỔI MẬT KHẨU");
-        btnTaiKhoan.setBorder(null);
-        btnTaiKhoan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
+        btnDoiMatKhau.setBackground(new java.awt.Color(240, 151, 57));
+        btnDoiMatKhau.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnDoiMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        btnDoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Acount.png"))); // NOI18N
+        btnDoiMatKhau.setText("ĐỔI MẬT KHẨU");
+        btnDoiMatKhau.setBorder(null);
+        btnDoiMatKhau.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaiKhoanActionPerformed(evt);
+                btnDoiMatKhauActionPerformed(evt);
             }
         });
 
@@ -275,7 +275,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
                     .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTaiKhoan1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -301,7 +301,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -325,7 +325,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             .addGroup(pnlBackGroundLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -351,14 +351,14 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         test("Trang Chủ");
     }//GEN-LAST:event_btnTrangChuActionPerformed
 
-    private void btnTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiKhoanActionPerformed
+    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
         DoiLaiMatKhauJInternalFrame taiKhoan = new DoiLaiMatKhauJInternalFrame();
         pnlMain.removeAll();
         pnlMain.add(taiKhoan).setVisible(true);
 
         test("Đổi mật khẩu");
 
-    }//GEN-LAST:event_btnTaiKhoanActionPerformed
+    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
         HoaDonJInternalFrame hoaDon = new HoaDonJInternalFrame();
@@ -463,7 +463,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
 
         if (x.equalsIgnoreCase("Trang Chủ")) {
             btnTrangChu.setBackground(ClickedColor);
-            btnTaiKhoan.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
             btnHoaDon.setBackground(DefaultColor);
             btnChiTietHoaDon.setBackground(DefaultColor);
             btnDanhMuc.setBackground(DefaultColor);
@@ -474,7 +474,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnKhachHang.setBackground(DefaultColor);
         } else if (x.equalsIgnoreCase("Tài Khoản")) {
             btnTrangChu.setBackground(DefaultColor);
-            btnTaiKhoan.setBackground(ClickedColor);
+            btnDoiMatKhau.setBackground(ClickedColor);
             btnHoaDon.setBackground(DefaultColor);
             btnChiTietHoaDon.setBackground(DefaultColor);
             btnDanhMuc.setBackground(DefaultColor);
@@ -485,7 +485,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnKhachHang.setBackground(DefaultColor);
         } else if (x.equalsIgnoreCase("Hóa Đơn")) {
             btnTrangChu.setBackground(DefaultColor);
-            btnTaiKhoan.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
             btnHoaDon.setBackground(ClickedColor);
             btnChiTietHoaDon.setBackground(DefaultColor);
             btnDanhMuc.setBackground(DefaultColor);
@@ -496,7 +496,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnKhachHang.setBackground(DefaultColor);
         } else if (x.equalsIgnoreCase("Chi Tiết Hóa Đơn")) {
             btnTrangChu.setBackground(DefaultColor);
-            btnTaiKhoan.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
             btnHoaDon.setBackground(DefaultColor);
             btnChiTietHoaDon.setBackground(ClickedColor);
             btnDanhMuc.setBackground(DefaultColor);
@@ -507,7 +507,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnKhachHang.setBackground(DefaultColor);
         } else if (x.equalsIgnoreCase("Danh Mục")) {
             btnTrangChu.setBackground(DefaultColor);
-            btnTaiKhoan.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
             btnHoaDon.setBackground(DefaultColor);
             btnChiTietHoaDon.setBackground(DefaultColor);
             btnDanhMuc.setBackground(ClickedColor);
@@ -518,7 +518,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnKhachHang.setBackground(DefaultColor);
         } else if (x.equalsIgnoreCase("Món Ăn")) {
             btnTrangChu.setBackground(DefaultColor);
-            btnTaiKhoan.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
             btnHoaDon.setBackground(DefaultColor);
             btnChiTietHoaDon.setBackground(DefaultColor);
             btnDanhMuc.setBackground(DefaultColor);
@@ -529,7 +529,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnKhachHang.setBackground(DefaultColor);
         } else if (x.equalsIgnoreCase("Doanh Thu")) {
             btnTrangChu.setBackground(DefaultColor);
-            btnTaiKhoan.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
             btnHoaDon.setBackground(DefaultColor);
             btnChiTietHoaDon.setBackground(DefaultColor);
             btnDanhMuc.setBackground(DefaultColor);
@@ -540,7 +540,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnKhachHang.setBackground(DefaultColor);
         } else if (x.equalsIgnoreCase("Nhân Viên")) {
             btnTrangChu.setBackground(DefaultColor);
-            btnTaiKhoan.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
             btnHoaDon.setBackground(DefaultColor);
             btnChiTietHoaDon.setBackground(DefaultColor);
             btnDanhMuc.setBackground(DefaultColor);
@@ -551,7 +551,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnKhachHang.setBackground(DefaultColor);
         } else if (x.equalsIgnoreCase("Khuyến Mãi")) {
             btnTrangChu.setBackground(DefaultColor);
-            btnTaiKhoan.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
             btnHoaDon.setBackground(DefaultColor);
             btnChiTietHoaDon.setBackground(DefaultColor);
             btnDanhMuc.setBackground(DefaultColor);
@@ -562,7 +562,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnKhachHang.setBackground(DefaultColor);
         } else if (x.equalsIgnoreCase("Khách Hàng")) {
             btnTrangChu.setBackground(DefaultColor);
-            btnTaiKhoan.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
             btnHoaDon.setBackground(DefaultColor);
             btnChiTietHoaDon.setBackground(DefaultColor);
             btnDanhMuc.setBackground(DefaultColor);
@@ -571,6 +571,18 @@ public class TrangChuJFrame extends javax.swing.JFrame {
             btnNhanVien.setBackground(DefaultColor);
             btnKhuyenMai.setBackground(DefaultColor);
             btnKhachHang.setBackground(ClickedColor);
+        }else if (x.equalsIgnoreCase("Đổi Mật Khẩu")) {
+            btnTrangChu.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(DefaultColor);
+            btnHoaDon.setBackground(DefaultColor);
+            btnChiTietHoaDon.setBackground(DefaultColor);
+            btnDanhMuc.setBackground(DefaultColor);
+            btnMonAn.setBackground(DefaultColor);
+            btnDoanhThu.setBackground(DefaultColor);
+            btnNhanVien.setBackground(DefaultColor);
+            btnKhuyenMai.setBackground(DefaultColor);
+            btnKhachHang.setBackground(DefaultColor);
+            btnDoiMatKhau.setBackground(ClickedColor);
         }
 
     }
@@ -617,12 +629,12 @@ public class TrangChuJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnChiTietHoaDon;
     private javax.swing.JButton btnDanhMuc;
     private javax.swing.JButton btnDoanhThu;
+    private javax.swing.JButton btnDoiMatKhau;
     private javax.swing.JButton btnHoaDon;
     private javax.swing.JButton btnKhachHang;
     private javax.swing.JButton btnKhuyenMai;
     private javax.swing.JButton btnMonAn;
     private javax.swing.JButton btnNhanVien;
-    private javax.swing.JButton btnTaiKhoan;
     private javax.swing.JButton btnTaiKhoan1;
     private javax.swing.JButton btnTrangChu;
     private javax.swing.JLabel jLabel1;

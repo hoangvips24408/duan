@@ -533,7 +533,6 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
         List<Object[]> list = monanDao.getTenMon(kh.getTenMon());
         for (Object[] row : list) {
             model.addRow(row);
-            System.out.println(row[0]);
         }
     }
 

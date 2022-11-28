@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import utils.MsgBox;
 
 /**
  *
@@ -258,9 +259,14 @@ public class DanhMucJInternalFrame extends javax.swing.JInternalFrame {
     }
     
     void delete(){
-        int maloai = (int) tblbang.getValueAt(this.row, 0);
+        try {
+             int maloai = (int) tblbang.getValueAt(this.row, 0);
         LoaiMonAn model = getFrom();
         dao.delete(maloai);
         filltoTable();
+        } catch (Exception e) {
+            MsgBox.alert(this, "Danh mục này có chứa món ăn !");
+        }
+       
     }
 }

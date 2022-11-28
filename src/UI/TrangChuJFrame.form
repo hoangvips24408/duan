@@ -115,7 +115,7 @@
                           <Component id="btnHoaDon" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnNhanVien" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnKhachHang" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnTaiKhoan" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnDoiMatKhau" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnTaiKhoan1" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -144,7 +144,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnKhachHang" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnTaiKhoan" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="btnDoiMatKhau" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnTaiKhoan1" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace pref="18" max="32767" attributes="0"/>
@@ -373,7 +373,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhachHangActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnTaiKhoan">
+            <Component class="javax.swing.JButton" name="btnDoiMatKhau">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="39" green="97" red="f0" type="rgb"/>
@@ -394,7 +394,7 @@
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaiKhoanActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDoiMatKhauActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnTaiKhoan1">

@@ -440,8 +440,7 @@ public class MonAnJInternalFrame extends javax.swing.JInternalFrame {
     }
 
     public void CapNhat() {
-        GetHinhAnh();
-        MonAn monAn = GetForm();
+       MonAn monAn = GetForm();
         try {
             maDAO.update(monAn);
             this.HienThiLenBang();
@@ -497,6 +496,7 @@ public class MonAnJInternalFrame extends javax.swing.JInternalFrame {
         if (monAn.getHinh() != null) {
             ImageIcon icon = new ImageIcon(XImage.read(monAn.getHinh()).getImage().getScaledInstance(with, height, 0));
             lbeHinh.setIcon(icon);
+            lbeHinh.setToolTipText(monAn.getHinh());
         }
 
     }
