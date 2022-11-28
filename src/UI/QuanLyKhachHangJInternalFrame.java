@@ -367,7 +367,11 @@ public class QuanLyKhachHangJInternalFrame extends javax.swing.JInternalFrame {
                 this.clearForm();
                 MsgBox.alert(this, "Thêm thành công!");
             } catch (Exception e) {
-                MsgBox.alert(this, "Thêm thất bại!");
+                if (kh.getMaKH().equalsIgnoreCase(txtMaKH.getText())) {
+                    MsgBox.alert(this, "Mã nhân viên đã tồn tại");
+                } else {
+                    MsgBox.alert(this, "Thêm thất bại!");
+                }
             }
         } else {
             MsgBox.alert(this, "Vui lòng điển đầy đủ thông tin!");

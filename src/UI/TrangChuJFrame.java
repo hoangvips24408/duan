@@ -56,6 +56,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         checksinhnhat();
         setIconImage(XImage.getAppIcon());
         khuyenMai();
+        this.setResizable(false);
     }
     
     @SuppressWarnings("unchecked")
