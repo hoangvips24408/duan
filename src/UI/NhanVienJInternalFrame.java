@@ -9,6 +9,7 @@ import Entity.NhanVien;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -43,6 +44,7 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
     JFileChooser filechooser = new JFileChooser();
     int row = 0;
     String pass = "123";
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     /**
      * Creates new form NhanVienJInternalFrame
@@ -332,6 +334,7 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         intsert();
+        clearfrom();
         taoMaQR();
         guiEmail();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -403,7 +406,7 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
             File file = filechooser.getSelectedFile();
             XImage.save(file);
             int with = lblHinhAnh.getWidth();
-    int heigh = lblHinhAnh.getHeight();
+            int heigh = lblHinhAnh.getHeight();
 
             ImageIcon icon = new ImageIcon(XImage.read(file.getName()).getImage().getScaledInstance(with, heigh, 0));
             lblHinhAnh.setIcon(icon);
@@ -416,7 +419,8 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         model.setRowCount(0);
         List<NhanVien> nv = dao.selectAll();
         for (NhanVien nhanVien : nv) {
-            Object[] row = {nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.getNgaySinh(), nhanVien.isGioiTinh() ? "Nam" : "Nữ", nhanVien.getDiaChi(), nhanVien.getSDT(), nhanVien.isChucVu() ? "Quản lý" : "Nhân viên", nhanVien.getHinh(), nhanVien.getEmail()};
+            String[] ngay = nhanVien.getNgaySinh().split("-");
+            Object[] row = {nhanVien.getMaNV(), nhanVien.getTenNV(), ngay[2]+"-"+ngay[1]+"-"+ngay[0], nhanVien.isGioiTinh() ? "Nam" : "Nữ", nhanVien.getDiaChi(), nhanVien.getSDT(), nhanVien.isChucVu() ? "Quản lý" : "Nhân viên", nhanVien.getHinh(), nhanVien.getEmail()};
             model.addRow(row);
         }
     }
@@ -425,21 +429,28 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         txtDiaChi.setText(nv.getDiaChi());
         txtHoTen.setText(nv.getTenNV());
         txtMaNhanVien.setText(nv.getMaNV());
-        txtNgaySinh.setText(nv.getNgaySinh());
+        try {
+            String[] ngay = nv.getNgaySinh().split("-");
+        txtNgaySinh.setText(ngay[2]+"-"+ngay[1]+"-"+ngay[0]);
+        } catch (Exception e) {
+            txtNgaySinh.setText("");
+        }
+        
         txtSoDienThoai.setText(nv.getSDT());
         txtemail.setText(nv.getEmail());
         rdoNam.setSelected(nv.isGioiTinh());
         rdoNu.setSelected(!nv.isGioiTinh());
         rdoQuanLy.setSelected(nv.isChucVu());
         rdoNhanVien.setSelected(!nv.isChucVu());
-
         if (nv.getHinh() != null) {
             int with = lblHinhAnh.getWidth();
-    int heigh = lblHinhAnh.getHeight();
+            int heigh = lblHinhAnh.getHeight();
 
             ImageIcon icon = new ImageIcon(XImage.read(nv.getHinh()).getImage().getScaledInstance(with, heigh, 0));
             lblHinhAnh.setIcon(icon);
             lblHinhAnh.setToolTipText(nv.getHinh());
+        }else{
+            lblHinhAnh.setIcon(null);
         }
     }
 
@@ -461,14 +472,17 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         nv.setHinh(lblHinhAnh.getToolTipText());
         nv.setMaNV(txtMaNhanVien.getText());
         nv.setMatKhau(pass);
-        nv.setNgaySinh(txtNgaySinh.getText());
+        String[] ngay = txtNgaySinh.getText().split("-");
+        nv.setNgaySinh(ngay[2]+"-"+ngay[1]+"-"+ngay[0]);
         nv.setSDT(txtSoDienThoai.getText());
         nv.setTenNV(txtHoTen.getText());
         return nv;
     }
- void clearfrom() {
+
+    void clearfrom() {
         this.setfrom(new NhanVien());
     }
+
     void intsert() {
         NhanVien nv = getFrom();
         try {
@@ -476,10 +490,12 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
             filltable();
             MsgBox.alert(this, "Thêm thành công");
         } catch (Exception e) {
+            MsgBox.alert(this, "Thêm thất bại!");
         }
 
     }
     String duongdan;
+
     void taoMaQR() {
         try {
 
@@ -491,7 +507,7 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
             FileOutputStream fout = new FileOutputStream(new File(Path_name + (f_name + ".PNG")));
             fout.write(out.toByteArray());
             fout.flush();
-            duongdan = Path_name + f_name +".PNG";
+            duongdan = Path_name + f_name + ".PNG";
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -522,10 +538,10 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
             msg.setSubject(subject);
             msg.setText(body);
             MimeBodyPart mbp = new MimeBodyPart();
-            mbp.setContent(body,"text/html; charset=utf-8");
+            mbp.setContent(body, "text/html; charset=utf-8");
             MimeBodyPart filepart = new MimeBodyPart();
             File file = new File(duongdan);
-            FileDataSource fds =new FileDataSource(file);
+            FileDataSource fds = new FileDataSource(file);
             filepart.setDataHandler(new DataHandler(fds));
             filepart.setFileName(file.getName());
             MimeMultipart multipart = new MimeMultipart();
@@ -537,7 +553,8 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
             Logger.getLogger(NhanVienJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    void update(){
+
+    void update() {
         NhanVien nv = getFrom();
         try {
             dao.update(nv);
@@ -546,7 +563,8 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
-    void delete(){
+
+    void delete() {
         if (MsgBox.confirm(this, "Bạn có chắc xóa nhân viên này")) {
             String maNV = txtMaNhanVien.getText();
             dao.delete(maNV);
