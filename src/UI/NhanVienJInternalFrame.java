@@ -519,11 +519,11 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         p.put("mail.smtp.starttls.enable", "true");
         p.put("mail.smtp.host", "smtp.gmail.com");
         p.put("mail.smtp.port", 587);
-        String senderEmail = "";
+        String senderEmail = "vihnhps24408@fpt.edu.vn";
         String toEmail = txtemail.getText();
         String subject = "Xin chào";
         String body = "username của bạn là " + txtMaNhanVien.getText() + " và password của bạn là " + pass;
-        String pass1 = "";
+        String pass1 = "23062019Vi";
         Session s = Session.getInstance(p, new javax.mail.Authenticator() {
             @Override
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {

@@ -671,7 +671,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
         p.put("mail.smtp.starttls.enable", "true");
         p.put("mail.smtp.host", "smtp.gmail.com");
         p.put("mail.smtp.port", 587);
-        String senderEmail = "";
+        String senderEmail = "Vihnhps24408@fpt.edu.vn";
         String toEmail = email;
         String subject = "Xin chào";
         String body = "TRI ÂN KHÁCH HÀNG NHÂN DỊP SINH NHẬT\n" +
@@ -684,7 +684,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
 "Lưu ý: Khi thanh toán hóa đơn vui lòng xuất trình Email này để được giảm giá  \n" +
 " \n" +
 "Mọi thắc mắc vui lòng phản hồi lại email: vihnhps24408@fpt.edu.vn";
-        String pass1 = "";
+        String pass1 = "23062019Vi";
         Session s = Session.getInstance(p, new javax.mail.Authenticator() {
             @Override
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
