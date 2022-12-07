@@ -13,9 +13,9 @@ import java.sql.ResultSet;
 public class JdbcHelper {
 
     static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=FastFood";
+    static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=FastFood3";
     static String user = "sa";
-    static String pass = "2306";
+    static String pass = "songlong";
 
     static {
         try {

@@ -46,9 +46,9 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
-    String dburl = "jdbc:sqlserver://localhost:1433;databaseName=FastFood";
+    String dburl = "jdbc:sqlserver://localhost:1433;databaseName=FastFood3";
     static String user = "sa";
-    static String pass = "2306";
+    static String pass = "songlong";
     LoaiMonDAO daoloai = new LoaiMonDAO();
     KhachHangDAO khdao = new KhachHangDAO();
     HoaDon hoadon = new HoaDon();

@@ -54,7 +54,7 @@ where HoaDon.MaHD=$P{mahd}]]>
 			</textField>
 			<image>
 				<reportElement x="11" y="6" width="53" height="50" uuid="9581b00a-f2fb-4c0e-a829-78542340c970"/>
-				<imageExpression><![CDATA["D:\\TÀI LIEU HOC\\TÀI LIEU HOC\\duan1\\Eatery (1)\\FastFood\\staff\\logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\Quan\\Documents\\NetBeansProjects\\chayLaiDuAn\\duan\\staff\\logo.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
