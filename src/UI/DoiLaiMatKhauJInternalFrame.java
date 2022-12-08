@@ -10,6 +10,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import UI.TrangChuJFrame;
 import utils.Auth;
 import utils.MsgBox;
+
 /**
  *
  * @author Quan
@@ -18,10 +19,9 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
 
     NhanVienDAO nvDAO = new NhanVienDAO();
 
-    
     public DoiLaiMatKhauJInternalFrame() {
         initComponents();
-        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         txtTenDangNhap.setText(Auth.user.getMaNV());
@@ -37,14 +37,13 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
         txtTenHienThi = new javax.swing.JTextField();
         lblTDN = new javax.swing.JLabel();
         txtTenDangNhap = new javax.swing.JTextField();
-        btnCapNhat = new javax.swing.JButton();
         lblCaiDatMatKhau = new javax.swing.JLabel();
         txtNhapLaiMK = new javax.swing.JPasswordField();
         lblNLMK = new javax.swing.JLabel();
         lblMKM = new javax.swing.JLabel();
         txtMatKhauMoi = new javax.swing.JPasswordField();
         txtMatKhauCu = new javax.swing.JPasswordField();
-        btnDangXuat = new javax.swing.JButton();
+        lblCapNhat = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1028, 585));
 
@@ -60,14 +59,6 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
         lblTDN.setForeground(new java.awt.Color(0, 153, 0));
         lblTDN.setText("Tên Đăng Nhập");
 
-        btnCapNhat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnCapNhat.setText("Cập Nhật");
-        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapNhatActionPerformed(evt);
-            }
-        });
-
         lblCaiDatMatKhau.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblCaiDatMatKhau.setForeground(new java.awt.Color(0, 153, 51));
         lblCaiDatMatKhau.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -82,11 +73,16 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
         lblMKM.setForeground(new java.awt.Color(0, 153, 0));
         lblMKM.setText("Mật Khẩu Mới");
 
-        btnDangXuat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnDangXuat.setText("Đăng Xuất");
-        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDangXuatActionPerformed(evt);
+        lblCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/capnhat_defaul.png"))); // NOI18N
+        lblCapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCapNhatMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCapNhatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCapNhatMouseExited(evt);
             }
         });
 
@@ -95,31 +91,31 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCaiDatMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(264, 264, 264)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblMKC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTDN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblMKM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNLMK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTHT, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCapNhat)
-                        .addGap(66, 66, 66)
-                        .addComponent(btnDangXuat)
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtTenDangNhap)
-                        .addComponent(txtTenHienThi)
-                        .addComponent(txtMatKhauCu)
-                        .addComponent(txtMatKhauMoi)
-                        .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(290, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(lblCaiDatMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblMKC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTDN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblMKM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNLMK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTHT, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTenDangNhap)
+                            .addComponent(txtTenHienThi)
+                            .addComponent(txtMatKhauCu)
+                            .addComponent(txtMatKhauMoi)
+                            .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 280, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblCapNhat)
+                .addGap(418, 418, 418))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,37 +139,38 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMKM)
                     .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNLMK)
                     .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCapNhat)
-                    .addComponent(btnDangXuat))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(lblCapNhat)
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-//        if(MsgBox.confirm(this, "Bạn có muốn đăng xuất tài khoản?") == true) {
-//            TrangChuJFrame.exit();
-//        }
-    }//GEN-LAST:event_btnDangXuatActionPerformed
-
-    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-        if(valueDate() == true) {
-            doiMatKhau();
+    private void lblCapNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCapNhatMouseClicked
+        if (evt.getClickCount() == 1 || evt.getClickCount() == 2) {
+            if (valueDate() == true) {
+                doiMatKhau();
+            }
         }
-    }//GEN-LAST:event_btnCapNhatActionPerformed
+    }//GEN-LAST:event_lblCapNhatMouseClicked
+
+    private void lblCapNhatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCapNhatMouseEntered
+        lblCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/capnhat_hover.png")));
+    }//GEN-LAST:event_lblCapNhatMouseEntered
+
+    private void lblCapNhatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCapNhatMouseExited
+        lblCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/capnhat_defaul.png")));
+    }//GEN-LAST:event_lblCapNhatMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCapNhat;
-    private javax.swing.JButton btnDangXuat;
     private javax.swing.JLabel lblCaiDatMatKhau;
+    private javax.swing.JLabel lblCapNhat;
     private javax.swing.JLabel lblMKC;
     private javax.swing.JLabel lblMKM;
     private javax.swing.JLabel lblNLMK;
@@ -203,7 +200,7 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     public void doiMatKhau() {
         String maNV = txtTenDangNhap.getText();
         String matKhau = new String(txtMatKhauCu.getPassword());
@@ -224,5 +221,3 @@ public class DoiLaiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
         }
     }
 }
-
-

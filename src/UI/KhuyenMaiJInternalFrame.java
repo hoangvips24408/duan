@@ -8,6 +8,7 @@ import DAO.KhachHangDAO;
 import DAO.KhuyenMaiDAO;
 import Entity.KhachHang;
 import Entity.KhuyenMai;
+import java.awt.Container;
 import java.io.File;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -43,7 +44,8 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
     KhuyenMaiDAO dao = new KhuyenMaiDAO();
     JFileChooser fileChooser = new JFileChooser();
     int row = -1;
-    KhachHangDAO daokh  = new KhachHangDAO();
+    KhachHangDAO daokh = new KhachHangDAO();
+
     public KhuyenMaiJInternalFrame() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -69,13 +71,9 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
         txtMaKhuyenMai = new javax.swing.JTextField();
         lblMKM = new javax.swing.JLabel();
         lblTKM = new javax.swing.JLabel();
-        btnMoi = new javax.swing.JButton();
         lblGKM1 = new javax.swing.JLabel();
         txtNgayKetThuc = new javax.swing.JTextField();
         lblGKM = new javax.swing.JLabel();
-        btnXoa = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
-        btnThem = new javax.swing.JButton();
         txtNgayBatDau = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         lblHinh = new javax.swing.JLabel();
@@ -83,6 +81,10 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
         tblKhuyenMai = new javax.swing.JTable();
         lblGKM2 = new javax.swing.JLabel();
         txtGiakhuyenMai = new javax.swing.JTextField();
+        lblThem = new javax.swing.JLabel();
+        lblMoi = new javax.swing.JLabel();
+        lblSua = new javax.swing.JLabel();
+        lblXoa = new javax.swing.JLabel();
 
         lblSale1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sale.png"))); // NOI18N
 
@@ -101,14 +103,6 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
         lblTKM.setForeground(new java.awt.Color(0, 153, 51));
         lblTKM.setText("Tên khuyến mãi");
 
-        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Clear.png"))); // NOI18N
-        btnMoi.setText("Mới");
-        btnMoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoiActionPerformed(evt);
-            }
-        });
-
         lblGKM1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblGKM1.setForeground(new java.awt.Color(0, 153, 51));
         lblGKM1.setText("Ngày kết thúc");
@@ -116,30 +110,6 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
         lblGKM.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblGKM.setForeground(new java.awt.Color(0, 153, 51));
         lblGKM.setText("Ngày bắt đầu");
-
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/repair.png"))); // NOI18N
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -191,6 +161,58 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
         lblGKM2.setForeground(new java.awt.Color(0, 153, 51));
         lblGKM2.setText("Giá Khuyến Mãi");
 
+        lblThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/them_defaul.png"))); // NOI18N
+        lblThem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblThemMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblThemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblThemMouseExited(evt);
+            }
+        });
+
+        lblMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/moi_defaul.png"))); // NOI18N
+        lblMoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMoiMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMoiMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblMoiMouseExited(evt);
+            }
+        });
+
+        lblSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sua_defaul.png"))); // NOI18N
+        lblSua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSuaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSuaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSuaMouseExited(evt);
+            }
+        });
+
+        lblXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/xoa_defaul.png"))); // NOI18N
+        lblXoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblXoaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblXoaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblXoaMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,21 +226,8 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnThem, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnMoi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(129, 129, 129)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblGKM2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtGiakhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(lblTKM, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,7 +247,21 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
                                                     .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(layout.createSequentialGroup()
                                                     .addGap(19, 19, 19)
-                                                    .addComponent(txtMaKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))))))
+                                                    .addComponent(txtMaKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblGKM2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtGiakhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(104, 104, 104)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(152, 152, 152)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblMoi)
+                                            .addComponent(lblSua)))
+                                    .addComponent(lblXoa)
+                                    .addComponent(lblThem)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(215, 215, 215)
                         .addComponent(lblSale1)
@@ -246,7 +269,7 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
                         .addComponent(lblQuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblSale2)))
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addGap(113, 247, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,39 +301,23 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblGKM2)
                             .addComponent(txtGiakhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnThem)
-                            .addComponent(btnXoa))
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnMoi)
-                            .addComponent(btnSua)))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMoi)
+                            .addComponent(lblThem))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSua)
+                            .addComponent(lblXoa)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        clear();
-    }//GEN-LAST:event_btnMoiActionPerformed
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
-    }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        update();
-    }//GEN-LAST:event_btnSuaActionPerformed
-
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        add();
-    }//GEN-LAST:event_btnThemActionPerformed
 
     private void lblHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhMouseClicked
         GetHinhAnh();
@@ -322,6 +329,62 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
             edit();
         }
     }//GEN-LAST:event_tblKhuyenMaiMouseClicked
+
+    private void lblThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemMouseEntered
+        lblThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/them_hover.png")));
+    }//GEN-LAST:event_lblThemMouseEntered
+
+    private void lblThemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemMouseExited
+        lblThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/them_defaul.png")));
+    }//GEN-LAST:event_lblThemMouseExited
+
+    private void lblThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemMouseClicked
+        if (evt.getClickCount() == 2 || evt.getClickCount() == 1) {
+            add();
+        }
+    }//GEN-LAST:event_lblThemMouseClicked
+
+    private void lblMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMoiMouseClicked
+        if (evt.getClickCount() == 2 || evt.getClickCount() == 1) {
+            clear();
+        }
+    }//GEN-LAST:event_lblMoiMouseClicked
+
+    private void lblMoiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMoiMouseEntered
+        lblMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/moi_hover.png")));
+    }//GEN-LAST:event_lblMoiMouseEntered
+
+    private void lblMoiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMoiMouseExited
+        lblMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/moi_defaul.png")));
+    }//GEN-LAST:event_lblMoiMouseExited
+
+    private void lblSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuaMouseClicked
+        if (evt.getClickCount() == 2 || evt.getClickCount() == 1) {
+            update();
+        }
+    }//GEN-LAST:event_lblSuaMouseClicked
+
+    private void lblSuaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuaMouseEntered
+        lblSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sua_hover.png")));
+    }//GEN-LAST:event_lblSuaMouseEntered
+
+    private void lblSuaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuaMouseExited
+        lblSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sua_defaul.png")));
+    }//GEN-LAST:event_lblSuaMouseExited
+
+    private void lblXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaMouseClicked
+        if (evt.getClickCount() == 2 || evt.getClickCount() == 1) {
+            delete();
+        }
+    }//GEN-LAST:event_lblXoaMouseClicked
+
+    private void lblXoaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaMouseEntered
+        lblXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/xoa_hover.png")));
+    }//GEN-LAST:event_lblXoaMouseEntered
+
+    private void lblXoaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaMouseExited
+        lblXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/xoa_defaul.png")));
+    }//GEN-LAST:event_lblXoaMouseExited
 
     public void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tblKhuyenMai.getModel();
@@ -424,7 +487,7 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
         KhuyenMai km = dao.selectByID(maKM);
         this.setForm(km);
         txtMaKhuyenMai.setEnabled(false);
-        btnThem.setEnabled(false);
+        lblThem.setEnabled(false);
     }
 
     public void clear() {
@@ -436,7 +499,7 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
         lblHinh.setToolTipText("");
         txtGiakhuyenMai.setText("");
         txtMaKhuyenMai.setEnabled(true);
-        btnThem.setEnabled(true);
+        lblThem.setEnabled(true);
     }
 
     public void update() {
@@ -484,18 +547,20 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    void guiemailkh(){
+
+    void guiemailkh() {
         List<KhachHang> list = daokh.selectAll();
         for (KhachHang khachHang : list) {
             guiEmail(khachHang.getEmail());
         }
     }
+
     void guiEmail(String email) {
         File file1 = fileChooser.getSelectedFile();
         String ngay = txtNgayBatDau.getText();
         String[] ngaybd = ngay.split("-");
         String a = txtNgayKetThuc.getText();
-        String[] ngaykt =a.split("-");
+        String[] ngaykt = a.split("-");
         Properties p = new Properties();
         p.put("mail.smtp.auth", "true");
         p.put("mail.smtp.starttls.enable", "true");
@@ -504,8 +569,8 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
         String senderEmail = "vihnhps24408@fpt.edu.vn";
         String toEmail = email;
         String subject = "Eatery xin chào quý khách";
-        String body = "Hiện nay cửa hàng đang có chưng trình khuyến mãi "+txtGiakhuyenMai.getText()+"% nhân dịp "+txtTenKhuyenMai.getText()+"\n"
-        +"Bắt đầu từ ngày "+ngaybd[2]+"-"+ngaybd[1]+"-"+ngaybd[0]+"kết thúc ngày "+ngaykt[2]+"-"+ngaykt[1]+"-"+ngaykt[0];
+        String body = "Hiện nay cửa hàng đang có chưng trình khuyến mãi " + txtGiakhuyenMai.getText() + "% nhân dịp " + txtTenKhuyenMai.getText() + "\n"
+                + "Bắt đầu từ ngày " + ngaybd[2] + "-" + ngaybd[1] + "-" + ngaybd[0] + "kết thúc ngày " + ngaykt[2] + "-" + ngaykt[1] + "-" + ngaykt[0];
         String pass1 = "23062019Vi";
         Session s = Session.getInstance(p, new javax.mail.Authenticator() {
             @Override
@@ -523,7 +588,7 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
             MimeBodyPart mbp = new MimeBodyPart();
             mbp.setContent(body, "text/html; charset=utf-8");
             MimeBodyPart filepart = new MimeBodyPart();
-            File file = new File("staff\\"+file1.getName());
+            File file = new File("staff\\" + file1.getName());
             FileDataSource fds = new FileDataSource(file);
             filepart.setDataHandler(new DataHandler(fds));
             filepart.setFileName(file.getName());
@@ -540,10 +605,6 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMoi;
-    private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnXoa;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblGKM;
@@ -551,10 +612,14 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblGKM2;
     private javax.swing.JLabel lblHinh;
     private javax.swing.JLabel lblMKM;
+    private javax.swing.JLabel lblMoi;
     private javax.swing.JLabel lblQuanLyKhuyenMai;
     private javax.swing.JLabel lblSale1;
     private javax.swing.JLabel lblSale2;
+    private javax.swing.JLabel lblSua;
     private javax.swing.JLabel lblTKM;
+    private javax.swing.JLabel lblThem;
+    private javax.swing.JLabel lblXoa;
     private javax.swing.JTable tblKhuyenMai;
     private javax.swing.JTextField txtGiakhuyenMai;
     private javax.swing.JTextField txtMaKhuyenMai;
