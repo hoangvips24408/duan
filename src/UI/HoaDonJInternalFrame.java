@@ -46,9 +46,9 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
-    String dburl = "jdbc:sqlserver://localhost:1433;databaseName=FastFood3";
+    String dburl = "jdbc:sqlserver://localhost:1433;databaseName=FastFood";
     static String user = "sa";
-    static String pass = "songlong";
+    static String pass = "2306";
     LoaiMonDAO daoloai = new LoaiMonDAO();
     KhachHangDAO khdao = new KhachHangDAO();
     HoaDon hoadon = new HoaDon();
@@ -445,6 +445,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1 || evt.getClickCount() == 2) {
             ThemHoaDon();
             GetFormChiTiet();
+            TruSoLuong();
         }
     }//GEN-LAST:event_lblThanhToanMouseClicked
 
@@ -529,8 +530,10 @@ void fillcombobox() {
         } else {
             for (int i = 0; i < n; i++) {
                 if (ma1.equals(tblChiTiet.getValueAt(i, 0))) {
-                    int soluong = (int) tblChiTiet.getValueAt(i, 3);
+                    int soluong = Integer.parseInt(tblChiTiet.getValueAt(i, 3).toString());
+                    float giatien = Float.parseFloat(tblChiTiet.getValueAt(i, 2).toString());
                     model.setValueAt(soluong + 1, i, 3);
+                    model.setValueAt(((soluong+1)*giatien), i, 4);
                     dem = 1;
                     break;
                 }

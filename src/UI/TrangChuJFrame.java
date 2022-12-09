@@ -660,6 +660,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
                 double ngaysinh = Double.parseDouble(ngaysinhnhat[2]);
                 if ((ngaysinh-ngaythuc)==1) {
                     guiEmail(khachHang.getEmail(),khachHang.getHoTen());
+                    MsgBox.alert(this, "Hôm nay là sinh nhật của khách hàng "+khachHang.getHoTen());
                 }
 
             }
@@ -684,7 +685,7 @@ public class TrangChuJFrame extends javax.swing.JFrame {
 "Lưu ý: Khi thanh toán hóa đơn vui lòng xuất trình Email này để được giảm giá  \n" +
 " \n" +
 "Mọi thắc mắc vui lòng phản hồi lại email: vihnhps24408@fpt.edu.vn";
-        String pass1 = "23062019Vi";
+        String pass1 = "";
         Session s = Session.getInstance(p, new javax.mail.Authenticator() {
             @Override
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {

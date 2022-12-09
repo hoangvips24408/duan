@@ -53,8 +53,8 @@ where HoaDon.MaHD=$P{mahd}]]>
 				<textFieldExpression><![CDATA[$F{MaHD}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="11" y="6" width="53" height="50" uuid="9581b00a-f2fb-4c0e-a829-78542340c970"/>
-				<imageExpression><![CDATA["C:\\Users\\Quan\\Documents\\NetBeansProjects\\chayLaiDuAn\\duan\\staff\\logo.jpg"]]></imageExpression>
+				<reportElement x="22" y="11" width="51" height="53" uuid="66a444df-9692-4727-bb7f-b475b82c3ab0"/>
+				<imageExpression><![CDATA["D:\\TÀI LIEU HOC\\TÀI LIEU HOC\\duan1\\Eatery (1)\\FastFood\\staff\\logo.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

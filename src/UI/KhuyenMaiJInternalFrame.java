@@ -571,7 +571,7 @@ public class KhuyenMaiJInternalFrame extends javax.swing.JInternalFrame {
         String subject = "Eatery xin chào quý khách";
         String body = "Hiện nay cửa hàng đang có chưng trình khuyến mãi " + txtGiakhuyenMai.getText() + "% nhân dịp " + txtTenKhuyenMai.getText() + "\n"
                 + "Bắt đầu từ ngày " + ngaybd[2] + "-" + ngaybd[1] + "-" + ngaybd[0] + "kết thúc ngày " + ngaykt[2] + "-" + ngaykt[1] + "-" + ngaykt[0];
-        String pass1 = "23062019Vi";
+        String pass1 = "";
         Session s = Session.getInstance(p, new javax.mail.Authenticator() {
             @Override
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {

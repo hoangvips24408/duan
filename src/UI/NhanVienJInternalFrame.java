@@ -45,7 +45,7 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
     int row = 0;
     String pass = "123";
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+     String duongdan;
     /**
      * Creates new form NhanVienJInternalFrame
      */
@@ -344,7 +344,7 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(lblXoa))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -365,12 +365,11 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblQuanLyNhanVienMouseClicked
 
     private void lblThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemMouseClicked
-        if (evt.getClickCount() == 2 || evt.getClickCount() == 1) {
+       
             intsert();
-            clearfrom();
             taoMaQR();
             guiEmail();
-        }
+            clearfrom();
     }//GEN-LAST:event_lblThemMouseClicked
 
     private void lblThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemMouseEntered
@@ -549,11 +548,10 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         }
 
     }
-    String duongdan;
+   
 
     void taoMaQR() {
         try {
-
             ByteArrayOutputStream out = QRCode.from(txtMaNhanVien.getText())
                     .to(ImageType.PNG).stream();
 
@@ -578,7 +576,7 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         String toEmail = txtemail.getText();
         String subject = "Xin chào";
         String body = "username của bạn là " + txtMaNhanVien.getText() + " và password của bạn là " + pass;
-        String pass1 = "23062019Vi";
+        String pass1 = "";
         Session s = Session.getInstance(p, new javax.mail.Authenticator() {
             @Override
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {

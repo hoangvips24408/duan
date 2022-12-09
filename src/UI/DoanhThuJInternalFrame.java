@@ -527,13 +527,17 @@ public class DoanhThuJInternalFrame extends javax.swing.JInternalFrame {
     }
 
     public void fillTableBangDiem() {
-        DefaultTableModel model = (DefaultTableModel) tblDoanhThuMonAn.getModel();
-        model.setRowCount(0);
-        MonAn kh = (MonAn) cboTenMon.getSelectedItem();
-        List<Object[]> list = monanDao.getTenMon(kh.getTenMon());
-        for (Object[] row : list) {
-            model.addRow(row);
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblDoanhThuMonAn.getModel();
+            model.setRowCount(0);
+            MonAn kh = (MonAn) cboTenMon.getSelectedItem();
+            List<Object[]> list = monanDao.getTenMon(kh.getTenMon());
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
+        } catch (Exception e) {
         }
+
     }
 
     public int TongSoHoaDon() {
