@@ -62,22 +62,22 @@ public class ChitietDAO {
     }
      public List<Object[]> selecttablehd(String tennv,int thang) {
         String sql = "{CALL sp_hoadontheonv(?,?)}";
-        String[] cols = {"MaHD","TenNV","NgayXuat","ThanhToan"};
+        String[] cols = {"MaHD","TenNV","NgayXuat","HoTen","ThanhToan"};
         return getListOfArray(sql, cols,tennv,thang);
     }
       public List<Object[]> selectallhoadon() {
         String sql = "{CALL sp_allhoadon}";
-        String[] cols = {"MaHD","TenNV","NgayXuat","ThanhToan"};
+        String[] cols = {"MaHD","TenNV","NgayXuat","HoTen","ThanhToan"};
         return getListOfArray(sql, cols);
     }
      public List<Object[]> selectallhoadontheothang(int thang) {
         String sql = "{CALL sp_hoadontheothang(?)}";
-        String[] cols = {"MaHD","TenNV","NgayXuat","ThanhToan"};
+        String[] cols = {"MaHD","TenNV","NgayXuat","HoTen","ThanhToan"};
         return getListOfArray(sql, cols,thang);
     } 
        public List<Object[]> selectallhoadontheotennv(String tennv) {
         String sql = "{CALL sp_hoadontheonv1(?)}";
-        String[] cols = {"MaHD","TenNV","NgayXuat","ThanhToan"};
+        String[] cols = {"MaHD","TenNV","NgayXuat","HoTen","ThanhToan"};
         return getListOfArray(sql, cols,tennv);
     } 
        public List<Object[]> selectablechitiet(int mahd) {

@@ -108,20 +108,24 @@ public class ThongKeDAO {
         return getListOfArray(sql, cols, thang);
     }
 
-    public static void main(String[] args) {
-        ThongKeDAO d = new ThongKeDAO();
-        List<Object[]> a = d.selectTenNVByThang();
-        for (Object[] objects : a) {
-            System.out.println(objects[0].toString());
-
-        }
+    public List<Object[]> getTableTheoThoiGian1(String ngay1,String ngay2) {
+        String sql = "{CALL doanhthutheothoigian1(?,?)}";
+        String[] cols = {"MaHD", "Tổng tiền", "NgayXuat"};
+        return getListOfArray(sql, cols, ngay1,ngay2);
     }
+
     
+
     public List<Object[]> getAllHoaDon() {
         String sql = "{CALL getAllHoaDon()}";
-        String[] cols = {"MaHD", "TongTien", "GiamGia", "ThanhToan", "NgayXuat" };
+        String[] cols = {"MaHD", "TongTien", "GiamGia", "ThanhToan", "NgayXuat"};
         return getListOfArray(sql, cols);
     }
-
-
+    public static void main(String[] args) {
+        ThongKeDAO a = new ThongKeDAO();
+        List<Object[]> b = a.getTableTheoThoiGian1("21-11-2022", "25-11-2022");
+        for (Object[] objects : b) {
+            System.out.println("objects = " + objects);
+        }
+    }
 }

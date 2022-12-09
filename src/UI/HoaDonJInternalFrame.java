@@ -446,6 +446,7 @@ public class HoaDonJInternalFrame extends javax.swing.JInternalFrame {
             ThemHoaDon();
             GetFormChiTiet();
             TruSoLuong();
+            clearhd();
         }
     }//GEN-LAST:event_lblThanhToanMouseClicked
 
@@ -711,5 +712,12 @@ void fillcombobox() {
 //            ma.setSoLuong(Integer.parseInt(tblChiTiet.getValueAt(i, 3).toString()));
             dao.tinhSoLuong(soluong, maMA);
         }
+    }
+    void clearhd(){
+        DefaultTableModel model = (DefaultTableModel) tblChiTiet.getModel();
+        model.setRowCount(0);
+        txtMaKH.setText("");
+        txtThanhToan.setText("");
+        txtTongTien.setText("");
     }
 }

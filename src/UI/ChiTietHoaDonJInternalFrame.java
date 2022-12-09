@@ -62,13 +62,13 @@ public class ChiTietHoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
         tblLichSuHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã hóa đơn", "Nhân viên", "Ngày xuất  HD", "Tổng tiền"
+                "Mã hóa đơn", "Nhân viên", "Ngày xuất  HD", "Tên khách hàng", "Tổng tiền"
             }
         ));
         tblLichSuHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
