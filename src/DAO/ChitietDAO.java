@@ -11,11 +11,12 @@ import utils.JdbcHelper;
  * @author Admin
  */
 public class ChitietDAO {
+
     String insert_sql = "insert into ChiTietHoaDon (MaHD, MaMA, SoLuong, ThanhTien) values (?, ?, ?, ?)";
     //String update_sql = "UPDATE HoaDon SET NgayXuat =?, TongTien =?, MaNV =?, MaKH =? where MaHD = ?";
     //String delete_sql = "DELETE FROM HoaDon where MaHD=?";
     //String select_all = "SELECT * FROM HoaDon";
-   // String select_byID = "SELECT * FROM HoaDon where MaHD=?";
+    // String select_byID = "SELECT * FROM HoaDon where MaHD=?";
     protected List<ChiTietHoaDon> selectBySql(String sql, Object... args) {
         List<ChiTietHoaDon> list = new ArrayList<>();
         try {
@@ -33,12 +34,12 @@ public class ChitietDAO {
         }
         return list;
     }
-    
+
     public void insert(ChiTietHoaDon entity) {
         JdbcHelper.update(insert_sql, entity.getMaHD(), entity.getMaMA(), entity.getSoLuong(), entity.getThanhTien());
     }
-    
-       private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         try {
             List<Object[]> list = new ArrayList<>();
             ResultSet rs = JdbcHelper.query(sql, args);
@@ -55,42 +56,62 @@ public class ChitietDAO {
             throw new RuntimeException(e);
         }
     }
-     public List<Object[]> selectTenNV(int thang) {
+
+    public List<Object[]> selectTenNV(int thang) {
         String sql = "{CALL sp_nvtheothang(?)}";
         String[] cols = {"TenNV"};
-        return getListOfArray(sql, cols,thang);
+        return getListOfArray(sql, cols, thang);
     }
-     public List<Object[]> selecttablehd(String tennv,int thang) {
+
+    public List<Object[]> selecttablehd(String tennv, String ngay) {
         String sql = "{CALL sp_hoadontheonv(?,?)}";
-        String[] cols = {"MaHD","TenNV","NgayXuat","HoTen","ThanhToan"};
-        return getListOfArray(sql, cols,tennv,thang);
+        String[] cols = {"MaHD", "TenNV", "NgayXuat", "HoTen", "ThanhToan"};
+        return getListOfArray(sql, cols, tennv, ngay);
     }
-      public List<Object[]> selectallhoadon() {
+
+    public List<Object[]> selectallhoadon() {
         String sql = "{CALL sp_allhoadon}";
-        String[] cols = {"MaHD","TenNV","NgayXuat","HoTen","ThanhToan"};
+        String[] cols = {"MaHD", "TenNV", "NgayXuat", "HoTen", "ThanhToan"};
         return getListOfArray(sql, cols);
     }
-     public List<Object[]> selectallhoadontheothang(int thang) {
+
+    public List<Object[]> selectallhoadontheothang(String ngay) {
         String sql = "{CALL sp_hoadontheothang(?)}";
-        String[] cols = {"MaHD","TenNV","NgayXuat","HoTen","ThanhToan"};
-        return getListOfArray(sql, cols,thang);
-    } 
-       public List<Object[]> selectallhoadontheotennv(String tennv) {
-        String sql = "{CALL sp_hoadontheonv1(?)}";
-        String[] cols = {"MaHD","TenNV","NgayXuat","HoTen","ThanhToan"};
-        return getListOfArray(sql, cols,tennv);
-    } 
-       public List<Object[]> selectablechitiet(int mahd) {
-        String sql = "{CALL sp_chitiet(?)}";
-        String[] cols = {"TenMon","GiaTien","SoLuong","ThanhTIen"};
-        return getListOfArray(sql, cols,mahd);
-    } 
-     public static void main(String[] args) {
-        ChitietDAO a = new ChitietDAO();
-        List<Object[]> b = a.selectablechitiet(1);
-         for (Object[] objects : b) {
-             System.out.println(objects);
-         }
+        String[] cols = {"MaHD", "TenNV", "NgayXuat", "HoTen", "ThanhToan"};
+        return getListOfArray(sql, cols, ngay);
     }
-   
+
+    public List<Object[]> selectallhoadontheotennv(String tennv) {
+        String sql = "{CALL sp_hoadontheonv1(?)}";
+        String[] cols = {"MaHD", "TenNV", "NgayXuat", "HoTen", "ThanhToan"};
+        return getListOfArray(sql, cols, tennv);
+    }
+
+    public List<Object[]> selectablechitiet(int mahd) {
+        String sql = "{CALL sp_chitiet(?)}";
+        String[] cols = {"TenMon", "GiaTien", "SoLuong", "ThanhTIen"};
+        return getListOfArray(sql, cols, mahd);
+    }
+
+    public List<Object[]> selecnvtheongay(String ngay) {
+        String sql = "{CALL ps_nhanvienngay(?)}";
+        String[] cols = {"TenNV"};
+        return getListOfArray(sql, cols, ngay);
+    }
+
+    public static void main(String[] args) {
+        ChitietDAO a = new ChitietDAO();
+        List<Object[]> b = a.selecnvtheongay("25-11-2022");
+        for (Object[] objects : b) {
+            System.out.println(objects[0].toString());
+        }
+        String c = "11-11-2022";
+        String[] d = c.split("-");
+        int e = Integer.parseInt(d[0]);
+        if (String.valueOf(e).length()==1) {
+            System.out.println(String.valueOf(e)+"-"+d[1]+"-"+d[2]);
+        }
+        
+    }
+
 }
